@@ -1,8 +1,10 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import NotF from '../pages/NotF/NotF';
-import Home from '../Pages/Home/Home';
 import DashboardLayout from '../Components/DashboardLayout/DashboardLayout';
+import Home from '../Pages/Dashboard/Home/Home';
+import Orders from '../Pages/Orders/Orders';
+import Customers from '../Pages/Customers/Customers';
 
 
 
@@ -15,8 +17,18 @@ export const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      {
+        path: "/Orders",
+        element: <Orders></Orders>
+      },
+      {
+        path: "/Customers",
+        element: <Customers />
+      },
     ],
   },
-
-  { path: "*", element: <NotF /> },
+  {
+    path: "*",
+    element: <NotF />
+  },
 ]);
