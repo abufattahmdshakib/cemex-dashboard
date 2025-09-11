@@ -4,6 +4,7 @@ import dayPicker from '../../../../src/assets/Day Picker.svg'
 import { MdOutlineDateRange } from "react-icons/md";
 import DashboardCards from '../Dashboardpage/DashboardCards ';
 import DashboardCharts from '../Dashboardpage/DashboardCharts ';
+import ProfitMargin from '../ProfitMargin/ProfitMargin';
 
 const Home = () => {
     const [openCalendar, setOpenCalendar] = useState(false);
@@ -65,6 +66,9 @@ const Home = () => {
             </div>
             <div className='my-6'>
                 <DashboardCharts></DashboardCharts>
+            </div>
+            <div className='my-6'>
+                <ProfitMargin></ProfitMargin>
             </div>
         </div>
     );

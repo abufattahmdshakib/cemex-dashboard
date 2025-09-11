@@ -29,7 +29,7 @@ const FlashEffect = () => {
         overlay.style.pointerEvents = "none";
         overlay.style.transition = "opacity 0.5s ease-in-out";
         overlay.style.opacity = "1";
-        overlay.style.borderRadius = "3px";
+        overlay.style.borderRadius = "2px";
 
         if (getComputedStyle(el).position === "static") {
           el.style.position = "relative";
