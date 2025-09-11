@@ -29,7 +29,7 @@ const Sidebar = () => {
     "bg-[#F0F2F5] font-[600] border-l-4 border-[#1D3557] montserrat-fontsfamily";
 
   return (
-    <div className="w-64 max-w-full h-full flex flex-col border-r border-gray-200 bg-[#FFFFFF] mt-5 px-5 overflow-y-auto overflow-x-hidden">
+    <div className="hide-scrollbar w-64 max-w-full h-full flex flex-col bg-[#FFFFFF] mt-5 px-5 overflow-y-auto overflow-x-hidden">
       {/* Section One */}
       <div>
         <ul className="space-y-2 mt-2 mb-10">

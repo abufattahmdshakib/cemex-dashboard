@@ -17,12 +17,12 @@ const DashboardLayout = () => {
             {/* Main Section */}
             <div className="flex flex-1 pt-20">
                 {/* Sidebar starts just below Navbar */}
-                <div className="w-64 mx-auto fixed top-20 left-0 h-[calc(100%-90px)] border-r border-gray-200 bg-white overflow-y-auto">
+                <div className="hide-scrollbar w-64 mx-auto fixed top-20 left-0 h-[calc(100%-90px)] bg-white overflow-y-auto">
                     <Sidebar />
                 </div>
 
                 {/* Main content (scrollable) */}
-                <div className="flex-1 ml-64 overflow-y-auto p-6 bg-[#FFFFFF] scrollbar-none">
+                <div className="hide-scrollbar flex-1 ml-64 overflow-y-auto p-6 bg-[#FFFFFF] scrollbar-none">
                     <Outlet />
                 </div>
 
