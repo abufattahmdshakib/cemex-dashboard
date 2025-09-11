@@ -6,6 +6,8 @@ import DashboardCards from '../Dashboardpage/DashboardCards ';
 import DashboardCharts from '../Dashboardpage/DashboardCharts ';
 import ProfitMargin from '../Dashboardpage/ProfitMargin';
 import PerformanceDashboard from '../Dashboardpage/PerformanceDashboard';
+import DivisionalSales from '../Dashboardpage/DivisionalSales';
+import Insights from '../../../Components/Insights/Insights';
 
 const Home = () => {
     const [openCalendar, setOpenCalendar] = useState(false);
@@ -63,16 +65,22 @@ const Home = () => {
             </div>
 
             <div className='my-8'>
-                <DashboardCards></DashboardCards>
+                <DashboardCards />
             </div>
             <div className='my-6'>
-                <DashboardCharts></DashboardCharts>
+                <DashboardCharts />
             </div>
             <div className='my-6'>
-                <ProfitMargin></ProfitMargin>
+                <ProfitMargin />
             </div>
             <div className='my-6'>
-                <PerformanceDashboard></PerformanceDashboard>
+                <PerformanceDashboard />
+            </div>
+            <div className='my-6'>
+                <DivisionalSales />
+            </div>
+            <div className='my-6'>
+                <Insights />
             </div>
         </div>
     );
