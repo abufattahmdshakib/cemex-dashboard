@@ -2,10 +2,16 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-
-
-
 .montserrat-fontsfamily {
     font-family: "Montserrat", sans-serif;
     font-style: normal;
+
+    
+}
+
+/* overlay flash effect */
+@keyframes overlay-blink {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
 }

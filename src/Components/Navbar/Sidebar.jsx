@@ -32,9 +32,10 @@ const Sidebar = () => {
     <div className="w-64 max-w-full h-full flex flex-col border-r border-gray-200 bg-[#FFFFFF] mt-5 px-5 overflow-y-auto overflow-x-hidden">
       {/* Section One */}
       <div>
-        <ul className="space-y-1">
+        <ul className="space-y-2 mt-2 mb-10">
           <li>
             <NavLink
+            data-flash
               to="/"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -55,6 +56,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
+            data-flash
               to="/orders"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -75,6 +77,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
+            data-flash
               to="/customers"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -95,6 +98,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
+            data-flash
               to="/products"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -115,6 +119,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
+            data-flash
               to="/ServiceArea"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -135,6 +140,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
+            data-flash
               to="/AdminPanel"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -155,6 +161,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
+            data-flash
               to="/reports"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
