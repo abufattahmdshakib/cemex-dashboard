@@ -54,7 +54,7 @@ const ProfitMargin = () => {
     }, []);
 
     return (
-        <div className="font-montserrat-fontsfamily">
+        <div className="montserrat-fontsfamily">
             {/* Header */}
             <div className="flex justify-between items-center mt-12 mb-6">
                 <h1 className="text-[22px] text-[#1D3557] font-[700]">Profit Margin by Segment</h1>

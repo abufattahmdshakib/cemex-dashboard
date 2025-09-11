@@ -3,6 +3,7 @@ import {
   BarChart,
   Bar,
   XAxis,
+  Tooltip,
   ResponsiveContainer,
 } from "recharts";
 
@@ -81,6 +82,19 @@ const DashboardCharts = () => {
               axisLine={false}
               tickLine={false}
             />
+            {/* Tooltip add korlam */}
+            <Tooltip
+              cursor={{ fill: "transparent" }}
+              contentStyle={{
+                backgroundColor: "transparent",
+                border: "none",
+                boxShadow: "none",
+                background: "white"
+              }}
+              labelStyle={{ color: "#333", fontWeight: 500 }}
+              itemStyle={{ color: "#6A0DAD", fontWeight: 600 }}
+              formatter={(value) => [`value:${value}`]}
+            />
             <Bar
               dataKey="value"
               fill="#E8DEEE"
@@ -105,6 +119,19 @@ const DashboardCharts = () => {
               tick={<CustomTick />}
               axisLine={false}
               tickLine={false}
+            />
+            {/* Tooltip add korlam */}
+            <Tooltip
+              cursor={{ fill: "transparent" }}
+              contentStyle={{
+                backgroundColor: "transparent",
+                border: "none",
+                boxShadow: "none",
+                background: "white"
+              }}
+              labelStyle={{ color: "#333", fontWeight: 500 }}
+              itemStyle={{ color: "#6A0DAD", fontWeight: 600 }}
+              formatter={(value) => [`value:${value}`]}
             />
             <Bar
               dataKey="value"
