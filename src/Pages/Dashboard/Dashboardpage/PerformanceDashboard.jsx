@@ -20,12 +20,12 @@ const sectionOneData = [
 ];
 
 const orderForecastData = [
-    { year: "2019", value: 1900 },
+    { year: "2019", value: 1500 },
     { year: "2020", value: 1000 },
     { year: "2021", value: 1700 },
     { year: "2022", value: 1000 },
     { year: "2023", value: 1600 },
-    { year: "2024", value: 1800 },
+    { year: "2024", value: 800 },
 ];
 
 const orderFrequencyData = [
