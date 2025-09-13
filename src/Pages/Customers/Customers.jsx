@@ -5,6 +5,7 @@ import dayPicker from "../../../src/assets/Day Picker.svg";
 import CustomersChart from './CustomersChart';
 import CustomerList from './CustomerList';
 import RevenueShare from './RevenueShare';
+import Insights from './Insights';
 
 const Customers = () => {
     const [openCalendar, setOpenCalendar] = useState(false);
@@ -60,6 +61,9 @@ const Customers = () => {
             </div>
             <div className='my-8'>
                 <RevenueShare />
+            </div>
+            <div className='my-6'>
+                <Insights />
             </div>
         </div>
     );
