@@ -23,11 +23,12 @@ const cities = [
 
 // Chart data
 const orderFrequencyData = [
-  { range: "Small Customers", value: 20000000 },
-  { range: "Big Retailers", value: 6000000 },
-  { range: "Logistics", value: 15000000 },
-  { range: "Medium Retailers", value: 10000000 },
-  { range: "Other", value: 5000000 },
+  { range: "Small Customers", value: 10000 },
+  { range: "Big Retailers", value: 50000 },
+  { range: "Logistics", value: 500000 },
+  { range: "Medium Retailers", value: 1000000 },
+  { range: "Other", value: 10000000 },
+  { value: 20000000 },
 ];
 
 // Custom YAxis Tick
@@ -44,19 +45,10 @@ const CustomTick = ({ x, y, payload }) => (
   </text>
 );
 
-// Custom XAxis Tick with currency formatting
+// Custom XAxis Tick – horizontal (no rotation)
 const CustomXTick = ({ x, y, payload }) => {
-  const labels = {
-    10000: "৳10,000",
-    50000: "৳50,000",
-    500000: "৳500,000",
-    1000000: "৳1,000,000",
-    10000000: "৳10,000,000",
-    20000000: "৳20,000,000",
-  };
-
-  // Force string labels for all defined ticks
-  const text = labels[payload.value] || payload.value;
+  const formatCurrency = (num) =>
+    "৳" + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   return (
     <text
@@ -68,7 +60,7 @@ const CustomXTick = ({ x, y, payload }) => {
       fontWeight={600}
       fontFamily="Montserrat"
     >
-      {text}
+      {formatCurrency(payload.value)}
     </text>
   );
 };
@@ -76,7 +68,7 @@ const CustomXTick = ({ x, y, payload }) => {
 const ProfitMargin = () => {
   const [selectedCity, setSelectedCity] = useState("All");
 
-  // Explicitly define all 6 ticks
+  // Define manual ticks (no auto)
   const xTicks = [10000, 50000, 500000, 1000000, 10000000, 20000000];
 
   return (
@@ -92,10 +84,11 @@ const ProfitMargin = () => {
           <button
             key={city}
             onClick={() => setSelectedCity(city)}
-            className={`px-4 py-2 rounded text-[12px] font-[500] ${selectedCity === city
+            className={`px-4 py-2 rounded text-[12px] font-[500] ${
+              selectedCity === city
                 ? "bg-[#1D3557] text-white border-[#1D3557]"
                 : "bg-[#F0F2F5] text-[#121417] border-[#F0F2F5]"
-              }`}
+            }`}
           >
             {city}
           </button>
@@ -104,11 +97,11 @@ const ProfitMargin = () => {
 
       {/* Chart */}
       <div className="w-full mx-auto bg-white">
-        <ResponsiveContainer width="100%" height={350}>
+        <ResponsiveContainer width="100%" height={380}>
           <BarChart
             data={orderFrequencyData}
             layout="vertical"
-            margin={{ top: 20, right: 40, left: 10, bottom: 20 }}
+            margin={{ top: 10, right: 40, left: 10, bottom: 30 }}
           >
             {/* YAxis */}
             <YAxis
@@ -120,14 +113,16 @@ const ProfitMargin = () => {
               width={150}
             />
 
-            {/* XAxis – show all 6 ticks */}
+            {/* XAxis – FULL manual control */}
             <XAxis
-              type="number"
-              domain={[0, 20000000]} // start from 0 to avoid skipping first tick
+              type="category"
               ticks={xTicks}
               tick={<CustomXTick />}
               axisLine={false}
               tickLine={false}
+              interval={0}
+              allowDecimals={false}
+              tickMargin={20}
             />
 
             {/* Tooltip */}
@@ -140,7 +135,7 @@ const ProfitMargin = () => {
               }}
               labelStyle={{ color: "#121417", fontWeight: 600 }}
               itemStyle={{ color: "#6A0DAD", fontWeight: 500 }}
-              formatter={(value) => [`৳${value.toLocaleString()}`, "Revenue"]}
+              formatter={(value) => [`৳${value.toLocaleString()}`, "value"]}
             />
 
             {/* Custom Bar */}
