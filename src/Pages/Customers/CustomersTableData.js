@@ -23,7 +23,7 @@ export const tableColumns = [
 
 // Sample divisions
 const divisions = [
-  "Dhaka", "Sylhet", "Chattogram", "Barisal", 
+  "Dhaka", "Sylhet", "Chattogram", "Barisal",
   "Mymensingh", "Rajshahi", "Rangpur", "Khulna"
 ];
 
@@ -36,14 +36,19 @@ const customerNames = [
   "Zahid Hasan", "Farhana Rahman", "Sakib Al Mahmud", "Jannat Ara"
 ];
 
-// Plain table data
-export const orderData = Array.from({ length: 50 }).map((_, i) => ({
-  orderId: `#ER${654 + i}`,
-  customer: customerNames[i % customerNames.length],
-  division: divisions[i % divisions.length],
-  contact: `0170${Math.floor(10000000 + Math.random() * 90000000)}`, // Random phone
-  orderFrequency: Math.floor(Math.random() * 50) + 1, // OF.
-  lifetimeValue: `৳${(Math.floor(Math.random() * 500000) + 1000).toLocaleString()}`,
-  avgValue: `৳${(Math.floor(Math.random() * 50000) + 1000).toLocaleString()}`,
-  update: edit, 
-}));
+// Plain table data — 250 rows
+export const orderData = Array.from({ length: 250 }).map((_, i) => {
+  const lifetime = Math.floor(Math.random() * 800000) + 5000;
+  const avg = Math.floor(lifetime / (Math.floor(Math.random() * 50) + 1));
+
+  return {
+    orderId: `#ER${654 + i}`,
+    customer: customerNames[i % customerNames.length],
+    division: divisions[i % divisions.length],
+    contact: `01${Math.floor(100000000 + Math.random() * 900000000)}`, // 11 digit random phone
+    orderFrequency: Math.floor(Math.random() * 50) + 1, // OF.
+    lifetimeValue: `৳${lifetime.toLocaleString()}`,
+    avgValue: `৳${avg.toLocaleString()}`,
+    update: edit,
+  };
+});
