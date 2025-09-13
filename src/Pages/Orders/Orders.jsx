@@ -4,6 +4,7 @@ import { FaPlus } from "react-icons/fa";
 import dayPicker from "../../../src/assets/Day Picker.svg";
 import OrdersCards from "./OrdersCards";
 import ProfitMargin from "./ProfitMargin";
+import OrderList from "./OrderList";
 
 const Orders = () => {
     const [openCalendar, setOpenCalendar] = useState(false);
@@ -56,6 +57,9 @@ const Orders = () => {
             </div>
             <div className="my-6">
                 <ProfitMargin />
+            </div>
+            <div className="my-6">
+                <OrderList />
             </div>
         </div>
     );
