@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { FaSearch, FaChevronLeft, FaChevronRight, FaChevronDown, FaList } from "react-icons/fa";
-import { tableColumns, orderData, orderStatuses } from "./OrderTableData";
+import { FaSearch, FaChevronLeft, FaChevronRight, FaChevronDown } from "react-icons/fa";
+import { tableColumns, orderData, orderStatuses } from "./CustomersTableData";
 import ManageRowDropdown from "./ManageRowDropdown";
 
-const OrderList = () => {
+const CustomerList = () => {
     const [resultsDropdownOpen, setResultsDropdownOpen] = useState(false);
     const [selectedStatus, setSelectedStatus] = useState("All");
-    const [selectedDivision, setSelectedDivision] = useState(""); 
-    const [divisionDropdownOpen, setDivisionDropdownOpen] = useState(false); 
+    const [selectedDivision, setSelectedDivision] = useState("");
+    const [divisionDropdownOpen, setDivisionDropdownOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [resultsPerPage, setResultsPerPage] = useState(10);
@@ -47,9 +47,9 @@ const OrderList = () => {
             </div>
 
             {/* Filters */}
-            <div className="flex flex-wrap gap-2 mb-5 items-center border-y border-[#DBE0E5] py-6">
+            <div className="flex flex-wrap gap-2 py-6 mb-5 items-center border-y border-[#DBE0E5]">
                 {orderStatuses.map((status) => {
-                    if (status === "Select Division") {
+                    if (status === "Select Area") {
                         return (
                             <div key={status} className="relative">
                                 <button
@@ -57,7 +57,7 @@ const OrderList = () => {
                                     onClick={() => setDivisionDropdownOpen(prev => !prev)}
                                     className="flex items-center gap-2 px-4 py-2 rounded text-[12px] font-[500] bg-[#F0F2F5] text-[#121417] hover:bg-gray-200"
                                 >
-                                    {selectedDivision || "Select Division"}
+                                    {selectedDivision || "Select Area"}
                                     <FaChevronDown
                                         className={`ml-1 transition-transform duration-300 ${divisionDropdownOpen ? "rotate-180" : ""}`}
                                     />
@@ -87,7 +87,11 @@ const OrderList = () => {
                         <button
                             data-flash
                             key={status}
-                            onClick={() => { setSelectedStatus(status); setCurrentPage(1); }}
+                            onClick={() => { 
+                                setSelectedStatus(status); 
+                                setCurrentPage(1); 
+                                if(status !== "Select Division") setSelectedDivision(""); // reset division
+                            }}
                             className={`px-4 py-2 rounded text-[12px] font-[500] ${selectedStatus === status ? "bg-[#1D3557] text-white" : "bg-[#F0F2F5] text-[#121417]"}`}
                         >
                             {status}
@@ -126,14 +130,11 @@ const OrderList = () => {
                                 {tableColumns.map((col) => (
                                     <td
                                         key={col.key}
-                                        className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "orderId" ? "text-[#121417]" : "text-[#757575]"
-                                            }`}
+                                        className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "orderId" ? "text-[#121417]" : "text-[#757575]"}`}
                                     >
-                                        {col.key === "amount" ? (
-                                            `৳${row[col.key].toLocaleString()}`
-                                        ) : col.key === "report" ? (
-                                            <div className="bg-[#F0F2F5] rounded-[8px] p-2 flex items-center justify-center w-8 h-8">
-                                                <img src={row[col.key]} alt="report" className="w-8 h-8" />
+                                        {col.key === "update" ? (
+                                            <div className="flex items-center justify-center w-6 h-6">
+                                                <img src={row[col.key]} alt="edit" className="w-5 h-5 cursor-pointer" />
                                             </div>
                                         ) : (
                                             row[col.key]
@@ -143,7 +144,6 @@ const OrderList = () => {
                             </tr>
                         ))}
                     </tbody>
-
                 </table>
             </div>
 
@@ -232,4 +232,4 @@ const OrderList = () => {
     );
 };
 
-export default OrderList;
+export default CustomerList;

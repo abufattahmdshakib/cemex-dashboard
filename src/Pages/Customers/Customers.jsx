@@ -3,6 +3,7 @@ import { MdOutlineDateRange } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
 import dayPicker from "../../../src/assets/Day Picker.svg";
 import CustomersChart from './CustomersChart';
+import CustomerList from './CustomerList';
 
 const Customers = () => {
     const [openCalendar, setOpenCalendar] = useState(false);
@@ -52,6 +53,9 @@ const Customers = () => {
             </div>
             <div className='my-8'>
                 <CustomersChart />
+            </div>
+            <div className='my-8'>
+                <CustomerList />
             </div>
         </div>
     );
