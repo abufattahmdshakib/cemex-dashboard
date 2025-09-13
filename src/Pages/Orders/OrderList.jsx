@@ -39,7 +39,7 @@ const OrderList = () => {
     for (let i = startPage; i <= endPage; i++) visiblePages.push(i);
 
     return (
-        <div className="montserrat-fontsfamily p-5">
+        <div className="montserrat-fontsfamily ">
             {/* Header */}
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-[22px] text-[#1D3557] font-[700]">Order List</h1>
@@ -109,7 +109,7 @@ const OrderList = () => {
             </div>
 
             {/* Table */}
-            <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
+            <div className="bg-white shadow-sm rounded-[12px] border border-[#E5E8EB] overflow-x-auto mb-8">
                 <table className="w-full border-collapse">
                     <thead>
                         <tr className="bg-white text-left">

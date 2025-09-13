@@ -5,6 +5,7 @@ import dayPicker from "../../../src/assets/Day Picker.svg";
 import OrdersCards from "./OrdersCards";
 import ProfitMargin from "./ProfitMargin";
 import OrderList from "./OrderList";
+import Efficiency from "./Efficiency";
 
 const Orders = () => {
     const [openCalendar, setOpenCalendar] = useState(false);
@@ -52,14 +53,17 @@ const Orders = () => {
                     </div>
                 </div>
             </div>
-            <div className="my-6">
+            <div className="my-8">
                 <OrdersCards />
             </div>
-            <div className="my-6">
+            <div className="my-8">
                 <ProfitMargin />
             </div>
-            <div className="my-6">
+            <div className="my-8">
                 <OrderList />
+            </div>
+            <div className="my-8">
+                <Efficiency />
             </div>
         </div>
     );
