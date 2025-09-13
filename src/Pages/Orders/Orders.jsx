@@ -6,6 +6,7 @@ import OrdersCards from "./OrdersCards";
 import ProfitMargin from "./ProfitMargin";
 import OrderList from "./OrderList";
 import Efficiency from "./Efficiency";
+import Insights from "./Insights";
 
 const Orders = () => {
     const [openCalendar, setOpenCalendar] = useState(false);
@@ -64,6 +65,9 @@ const Orders = () => {
             </div>
             <div className="my-8">
                 <Efficiency />
+            </div>
+            <div className="my-5">
+                <Insights />
             </div>
         </div>
     );
