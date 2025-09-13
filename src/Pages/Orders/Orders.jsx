@@ -24,7 +24,7 @@ const Orders = () => {
                 {/* Export & Calendar Button */}
                 <div className="flex items-center gap-4">
                     {/* New Order */}
-                    <p className="montserrat-fontsfamily text-white font-semibold text-[14px] rounded-[8px] bg-[#1D3557] w-38 flex items-center justify-center gap-2 py-3 px-4 cursor-pointer">
+                    <p className="montserrat-fontsfamily text-white font-semibold text-[14px] rounded-[8px] bg-[#1D3557] w-38 flex items-center justify-center gap-2 py-2 px-4 cursor-pointer">
                         <FaPlus className="w-3 h-3" /> New Order
                     </p>
 
@@ -32,7 +32,7 @@ const Orders = () => {
                     <div data-flash className="relative" ref={calendarRef}>
                         <button
                             onClick={() => setOpenCalendar(!openCalendar)}
-                            className="montserrat-fontsfamily bg-[#DBE0E5] px-4 py-3 rounded-[8px] flex items-center gap-2 text-[#121417] text-[14px] font-[500]"
+                            className="montserrat-fontsfamily bg-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center gap-2 text-[#121417] text-[14px] font-[500]"
                         >
                             Nov 25, 2023 - Oct 31, 2024{" "}
                             <span className="text-[#757575] text-[20px]">
