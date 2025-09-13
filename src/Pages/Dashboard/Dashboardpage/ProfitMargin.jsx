@@ -62,6 +62,7 @@ const ProfitMargin = () => {
         {/* Manage Row Button with Dropdown */}
         <div className="relative" ref={dropdownRef}>
           <button
+            data-flash
             onClick={() => setDropdownOpen(!dropdownOpen)}
             className="flex items-center shadow-sm gap-2 border-1 border-[#DBE0E5] bg-[#FFFFFF] text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
           >
@@ -102,7 +103,7 @@ const ProfitMargin = () => {
             className={`px-4 py-2 rounded text-[12px] font-[500] ${selectedCity === city
               ? "bg-[#1D3557] text-white border-[#1D3557]"
               : "bg-[#F0F2F5] text-[#121417] border-[#F0F2F5]"
-            }`}
+              }`}
           >
             {city}
           </button>
@@ -133,7 +134,7 @@ const ProfitMargin = () => {
                     className={`px-4 py-3 border-b border-[#E5E8EB] text-[14px] font-[500] ${col.key === "segment"
                       ? "text-[#121417]"
                       : "text-[#757575]"
-                    }`}
+                      }`}
                   >
                     {col.key === "revenue" || col.key === "costs" || col.key === "profit"
                       ? `৳${row[col.key].toLocaleString()}`

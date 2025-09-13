@@ -1,19 +1,24 @@
 import React, { useState } from "react";
-import { FaSearch, FaChevronLeft, FaChevronRight, FaChevronDown } from "react-icons/fa";
+import { FaSearch, FaChevronLeft, FaChevronRight, FaChevronDown, FaList } from "react-icons/fa";
 import { tableColumns, orderData, orderStatuses } from "./OrderTableData";
 import ManageRowDropdown from "./ManageRowDropdown";
 
 const OrderList = () => {
     const [resultsDropdownOpen, setResultsDropdownOpen] = useState(false);
     const [selectedStatus, setSelectedStatus] = useState("All");
+    const [selectedDivision, setSelectedDivision] = useState(""); 
+    const [divisionDropdownOpen, setDivisionDropdownOpen] = useState(false); 
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [resultsPerPage, setResultsPerPage] = useState(10);
 
+    const divisions = ["Dhaka", "Sylhet", "Chattogram", "Barisal", "Mymensingh", "Rajshahi", "Rangpur", "Khulna"];
+
     // Filtered & searched data
     const filteredData = orderData
-        .filter((order) => selectedStatus === "All" || order.status === selectedStatus)
-        .filter((order) => order.orderId.toLowerCase().includes(searchTerm.toLowerCase()));
+        .filter(order => selectedStatus === "All" || order.status === selectedStatus)
+        .filter(order => selectedDivision ? order.division === selectedDivision : true)
+        .filter(order => order.orderId.toLowerCase().includes(searchTerm.toLowerCase()));
 
     // Pagination
     const totalPages = Math.ceil(filteredData.length / resultsPerPage);
@@ -38,29 +43,66 @@ const OrderList = () => {
             {/* Header */}
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-[22px] text-[#1D3557] font-[700]">Order List</h1>
-                <ManageRowDropdown /> {/* Use the new component here */}
+                <ManageRowDropdown />
             </div>
 
             {/* Filters */}
             <div className="flex flex-wrap gap-2 mb-5 items-center">
-                {orderStatuses.map((status) => (
-                    <button
-                        data-flash
-                        key={status}
-                        onClick={() => { setSelectedStatus(status); setCurrentPage(1); }}
-                        className={`px-4 py-2 rounded text-[12px] font-[500] ${selectedStatus === status ? "bg-[#1D3557] text-white" : "bg-[#F0F2F5] text-[#121417]"}`
-                        }
-                    >
-                        {status}
-                    </button>
-                ))}
+                {orderStatuses.map((status) => {
+                    if (status === "Select Division") {
+                        return (
+                            <div key={status} className="relative">
+                                <button
+                                    data-flash
+                                    onClick={() => setDivisionDropdownOpen(prev => !prev)}
+                                    className="flex items-center gap-2 px-4 py-2 rounded text-[12px] font-[500] bg-[#F0F2F5] text-[#121417] hover:bg-gray-200"
+                                >
+                                    {selectedDivision || "Select Division"}
+                                    <FaChevronDown
+                                        className={`ml-1 transition-transform duration-300 ${divisionDropdownOpen ? "rotate-180" : ""}`}
+                                    />
+                                </button>
+                                {divisionDropdownOpen && (
+                                    <ul className="absolute mt-2 w-40 bg-white border border-[#DBE0E5] rounded-[8px] shadow-lg z-10">
+                                        {divisions.map((div) => (
+                                            <li
+                                                key={div}
+                                                onClick={() => {
+                                                    setSelectedDivision(div);
+                                                    setDivisionDropdownOpen(false);
+                                                    setCurrentPage(1);
+                                                }}
+                                                className="px-4 py-2 cursor-pointer hover:bg-[#1D3557] hover:text-white"
+                                            >
+                                                {div}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                        );
+                    }
+
+                    return (
+                        <button
+                            data-flash
+                            key={status}
+                            onClick={() => { setSelectedStatus(status); setCurrentPage(1); }}
+                            className={`px-4 py-2 rounded text-[12px] font-[500] ${selectedStatus === status ? "bg-[#1D3557] text-white" : "bg-[#F0F2F5] text-[#121417]"}`}
+                        >
+                            {status}
+                        </button>
+                    );
+                })}
+
+                {/* Search input */}
                 <div data-flash className="relative ml-auto">
                     <input
                         type="text"
                         placeholder="Search Order ID"
                         value={searchTerm}
                         onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
-                        className="pl-10 pr-4 py-2 border rounded-[8px] border-[#DBE0E5] text-[14px]"
+                        className="pl-10 pr-4 py-2 border rounded-[8px] border-[#1D3557] text-[14px]"
                     />
                     <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#757575]" />
                 </div>
@@ -72,7 +114,7 @@ const OrderList = () => {
                     <thead>
                         <tr className="bg-white text-left">
                             {tableColumns.map((col) => (
-                                <th key={col.key} className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[14px] font-[600]">
+                                <th key={col.key} className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[12px] font-[600]">
                                     {col.label}
                                 </th>
                             ))}
@@ -82,53 +124,55 @@ const OrderList = () => {
                         {currentData.map((row) => (
                             <tr key={row.orderId} className="hover:bg-gray-50">
                                 {tableColumns.map((col) => (
-                                    <td key={col.key} className="px-4 py-3 border-b border-[#E5E8EB] text-[14px] font-[500]">
-                                        {col.key === "amount"
-                                            ? `৳${row[col.key].toLocaleString()}`
-                                            : col.key === "report"
-                                                ? <img src={row[col.key]} alt="report" className="w-5 h-5" />
-                                                : row[col.key]
-                                        }
+                                    <td
+                                        key={col.key}
+                                        className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "orderId" ? "text-[#121417]" : "text-[#757575]"
+                                            }`}
+                                    >
+                                        {col.key === "amount" ? (
+                                            `৳${row[col.key].toLocaleString()}`
+                                        ) : col.key === "report" ? (
+                                            <div className="bg-[#F0F2F5] rounded-[8px] p-2 flex items-center justify-center w-8 h-8">
+                                                <img src={row[col.key]} alt="report" className="w-8 h-8" />
+                                            </div>
+                                        ) : (
+                                            row[col.key]
+                                        )}
                                     </td>
                                 ))}
                             </tr>
                         ))}
                     </tbody>
+
                 </table>
             </div>
 
             {/* Pagination */}
             <div className="flex justify-between items-center mt-4 text-[14px]">
                 <div className="flex items-center gap-1">
-                    {/* Back button */}
                     <button
                         data-flash
                         onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                         disabled={currentPage === 1}
-                        className={`px-3 py-1 flex items-center text-[#626262] border rounded-l-[6px] border-[#DBE0E5] hover:bg-gray-100 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
-                            }`}
+                        className={`px-3 py-1 flex items-center text-[#626262] border rounded-l-[6px] border-[#DBE0E5] hover:bg-gray-100 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                         <FaChevronLeft className="text-[#757575]" />
                         Back
                     </button>
 
-                    {/* Page numbers */}
                     {visiblePages.map((page) => (
                         <button
                             data-flash
                             key={page}
                             onClick={() => setCurrentPage(page)}
-                            className={`py-1 px-2 text-[14px] text-[#121417] border rounded-[8px] border-[#DBE0E5] hover:bg-gray-100 ${page === currentPage ? "bg-[#1D3557] text-white" : "bg-[#FFFFFF] text-[#121417]"
-                                }`}
+                            className={`py-1 px-2 text-[14px] text-[#121417] border rounded-[8px] border-[#DBE0E5] hover:bg-gray-100 ${page === currentPage ? "bg-[#1D3557] text-white" : "bg-[#FFFFFF] text-[#121417]"}`}
                         >
                             {page}
                         </button>
                     ))}
 
-                    {/* Ellipsis */}
                     {endPage < totalPages && <span className="px-2">…</span>}
 
-                    {/* Last page button */}
                     {endPage < totalPages && (
                         <button
                             data-flash
@@ -139,13 +183,11 @@ const OrderList = () => {
                         </button>
                     )}
 
-                    {/* Next button */}
                     <button
                         data-flash
                         onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                         disabled={currentPage === totalPages}
-                        className={`px-3 py-1 flex items-center gap-2 border rounded-r-[8px] border-[#DBE0E5] hover:bg-gray-100 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
-                            }`}
+                        className={`px-3 py-1 flex items-center gap-2 border rounded-r-[8px] border-[#DBE0E5] hover:bg-gray-100 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                         Next
                         <FaChevronRight className="text-[#626262]" />

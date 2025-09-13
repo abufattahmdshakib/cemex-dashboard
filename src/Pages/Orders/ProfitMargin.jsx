@@ -34,8 +34,8 @@ const orderFrequencyData = [
 // Custom YAxis Tick
 const CustomTick = ({ x, y, payload }) => (
   <text
-    x={0}
-    y={y + 5}
+    x={x -130}
+    y={y}
     textAnchor="start"
     fill="#121417"
     fontSize={12}
@@ -52,9 +52,9 @@ const CustomXTick = ({ x, y, payload }) => {
 
   return (
     <text
-      x={x}
-      y={y + 15}
-      textAnchor="middle"
+      x={x -15}
+      y={y}
+      textAnchor="end"
       fill="#757575"
       fontSize={12}
       fontWeight={600}
@@ -84,11 +84,10 @@ const ProfitMargin = () => {
           <button
             key={city}
             onClick={() => setSelectedCity(city)}
-            className={`px-4 py-2 rounded text-[12px] font-[500] ${
-              selectedCity === city
-                ? "bg-[#1D3557] text-white border-[#1D3557]"
-                : "bg-[#F0F2F5] text-[#121417] border-[#F0F2F5]"
-            }`}
+            className={`px-4 py-2 rounded text-[12px] font-[500] ${selectedCity === city
+              ? "bg-[#1D3557] text-white border-[#1D3557]"
+              : "bg-[#F0F2F5] text-[#121417] border-[#F0F2F5]"
+              }`}
           >
             {city}
           </button>
@@ -97,11 +96,11 @@ const ProfitMargin = () => {
 
       {/* Chart */}
       <div className="w-full mx-auto bg-white">
-        <ResponsiveContainer width="100%" height={380}>
+        <ResponsiveContainer width="100%" height={300}>
           <BarChart
             data={orderFrequencyData}
             layout="vertical"
-            margin={{ top: 10, right: 40, left: 10, bottom: 30 }}
+            margin={{ top: 20}}
           >
             {/* YAxis */}
             <YAxis
@@ -142,7 +141,7 @@ const ProfitMargin = () => {
             <Bar
               dataKey="value"
               fill="#E8DEEE"
-              barSize={25}
+              barSize={30}
               minPointSize={5}
               shape={(props) => {
                 const { fill, x, y, width, height } = props;
