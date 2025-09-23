@@ -38,12 +38,25 @@ const ManageRowDropdown = () => {
     }
   }, [dropdownOpen]);
 
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="relative montserrat-fontsfamily" ref={dropdownRef}>
       <button
         data-flash
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        className="flex items-center shadow-md  gap-2 border border-[#DBE0E5] bg-white text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
+        className="flex items-center shadow-md gap-2 border border-[#DBE0E5] bg-white text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
       >
         Manage Row ({checkboxes.filter(Boolean).length})
         <FaChevronDown
