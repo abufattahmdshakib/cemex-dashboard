@@ -42,7 +42,7 @@ const CustomerList = () => {
         <div className="montserrat-fontsfamily ">
             {/* Header */}
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-[22px] text-[#1D3557] font-[700]">Order List</h1>
+                <h1 className="text-[22px] text-[#1D3557] font-[700]">Customer List</h1>
                 <ManageRowDropdown />
             </div>
 
