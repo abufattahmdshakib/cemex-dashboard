@@ -38,11 +38,11 @@ const customerNames = [
 // Plain data only — use note icon for report
 export const orderData = Array.from({ length: 250 }).map((_, i) => ({
     orderId: `#ER${654 + i}`,
-    customer: customerNames[i % customerNames.length], // নাম assign
+    customer: customerNames[i % customerNames.length], 
     division: divisions[i % divisions.length],
     orderDate: `${(i % 30) + 1} NOV, 24`,
     quantity: Math.floor(Math.random() * 5000) + 1,
     amount: Math.floor(Math.random() * 500000) + 1000,
     status: statuses[i % statuses.length],
-    report: note, // assign the SVG
+    report: note, 
 }));
