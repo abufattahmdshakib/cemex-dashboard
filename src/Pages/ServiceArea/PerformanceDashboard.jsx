@@ -14,7 +14,7 @@ const PerformanceDashboard = () => {
                 {sectionOneData.map((card) => (
                     <div
                         key={card.id}
-                        className="p-6 rounded-lg shadow-sm border border-[#DBE0E5] flex flex-col justify-between"
+                        className="p-6 rounded-lg shadow-md  border border-[#DBE0E5] flex flex-col justify-between"
                     >
                         <h3 className="text-[#121417] font-[500] text-[16px]">{card.title}</h3>
                         <div className="flex justify-between items-center mt-4">

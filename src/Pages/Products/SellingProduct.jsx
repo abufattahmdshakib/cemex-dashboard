@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { MdOutlineDateRange } from "react-icons/md";
 import dayPicker from "../../../src/assets/Day Picker.svg";
 import {
@@ -75,11 +75,24 @@ const SellingProduct = () => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const calendarRef = useRef(null);
 
+  // outside click handler
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+        setOpenCalendar(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   // Define manual ticks (no auto)
   const xTicks = [10000, 50000, 500000, 1000000, 10000000, 20000000];
 
   return (
-    <div className="montserrat-fontsfamily border p-5 border-[#DBE0E5] shadow-sm rounded-[12px]">
+    <div className="montserrat-fontsfamily border p-5 border-[#DBE0E5] shadow-md  rounded-[12px]">
       <div className="flex justify-between items-center">
         {/* Header */}
         <h1 className="text-[16px] text-[#121417] text-left font-[700]">
@@ -134,7 +147,7 @@ const SellingProduct = () => {
           <BarChart
             data={orderFrequencyData}
             layout="vertical"
-            margin={{ top:20, right: 20 }}
+            margin={{ top: 20, right: 20 }}
           >
             {/* YAxis */}
             <YAxis
@@ -148,14 +161,14 @@ const SellingProduct = () => {
 
             {/* XAxis – FULL manual control */}
             <XAxis
-              type="category" 
+              type="category"
               ticks={xTicks}
               tick={<CustomXTick />}
               axisLine={false}
               tickLine={false}
               interval={0}
               allowDecimals={false}
-              tickMargin={5} // smaller tick margin
+              tickMargin={5}
             />
 
             {/* Tooltip */}

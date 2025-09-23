@@ -7,11 +7,14 @@ import PerformanceDashboard from './PerformanceDashboard';
 import RevenueShare from './RevenueShare';
 import DashboardCards from '../Dashboard/Dashboardpage/DashboardCards ';
 import ServiceAreaCharts from './ServiceAreaCharts';
+import ServiceAreaManage from './ServiceAreaManage';
 
 const ServiceArea = () => {
     return (
         <div>
-            ServiceArea
+            <div className='my-8'>
+                <ServiceAreaManage />
+            </div>
             <div className='my-8'>
                 <DashboardCards />
             </div>

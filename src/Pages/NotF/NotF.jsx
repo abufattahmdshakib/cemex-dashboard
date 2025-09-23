@@ -4,7 +4,7 @@ import notfoundimg from '../../../src/assets/dribbble_1.gif';
 
 const NotF = () => {
     return (
-        <div className="card bg-base-100  h-[620px] shadow-sm my-8 mx-auto">
+        <div className="card bg-base-100  h-[620px] shadow-md  my-8 mx-auto">
             <figure className="px-10 mx-auto ">
                 <img
                     src={notfoundimg}

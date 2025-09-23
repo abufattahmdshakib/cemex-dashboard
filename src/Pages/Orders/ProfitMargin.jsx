@@ -72,14 +72,14 @@ const ProfitMargin = () => {
   const xTicks = [10000, 50000, 500000, 1000000, 10000000, 20000000];
 
   return (
-    <div className="montserrat-fontsfamily border p-5 border-[#DBE0E5] shadow-sm rounded-[12px]">
+    <div className="montserrat-fontsfamily border p-5 border-[#DBE0E5] shadow-md  rounded-[12px]">
       {/* Header */}
       <h1 className="text-[22px] text-[#1D3557] text-left font-[700] mt-5">
         Orders by Customer Segment with Revenue
       </h1>
 
       {/* City buttons */}
-      <div className="flex justify-around gap-2 py-7 border-y border-[#DBE0E5] mt-5">
+      <div className="flex justify-start gap-5 py-7 border-y border-[#DBE0E5] mt-5">
         {cities.map((city) => (
           <button
             key={city}

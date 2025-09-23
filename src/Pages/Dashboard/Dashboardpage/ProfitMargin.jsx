@@ -64,7 +64,7 @@ const ProfitMargin = () => {
           <button
             data-flash
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="flex items-center shadow-sm gap-2 border-1 border-[#DBE0E5] bg-[#FFFFFF] text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
+            className="flex items-center shadow-md  gap-2 border-1 border-[#DBE0E5] bg-[#FFFFFF] text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
           >
             Manage Row ({checkboxes.filter(c => c).length})
             <FaChevronDown
@@ -95,7 +95,7 @@ const ProfitMargin = () => {
       </div>
 
       {/* City Buttons */}
-      <div className="flex justify-around gap-2 py-7 border-y-1 border-[#DBE0E5] my-10">
+      <div className="flex justify-start gap-5 py-7 border-y-1 border-[#DBE0E5] my-10">
         {cities.map((city) => (
           <button
             key={city}

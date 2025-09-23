@@ -48,7 +48,7 @@ const ManageRowDropdown = () => {
             <button
                 data-flash
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center shadow-sm gap-2 border border-[#DBE0E5] bg-white text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
+                className="flex items-center shadow-md  gap-2 border border-[#DBE0E5] bg-white text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
             >
                 Manage Row ({checkboxes.filter(Boolean).length})
                 <FaChevronDown

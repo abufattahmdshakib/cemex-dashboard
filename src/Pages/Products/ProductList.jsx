@@ -62,7 +62,7 @@ const ProductList = () => {
                 </div>
 
                 {/* Table */}
-                <div className="bg-white shadow-sm rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
+                <div className="bg-white shadow-md  rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
                     <table className="w-full border-collapse">
                         <thead>
                             <tr className="bg-white text-left">

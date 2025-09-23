@@ -1,11 +1,25 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { MdOutlineDateRange } from "react-icons/md";
-import documenticon from "../../../../src/assets/document-download.svg"; // তোমার আসল path বসাবে
-import dayPicker from "../../../../src/assets/Day Picker.svg";   // তোমার আসল path বসাবে
+import documenticon from "../../../../src/assets/document-download.svg"; 
+import dayPicker from "../../../../src/assets/Day Picker.svg";
 
 const WelcomeSection = () => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const calendarRef = useRef(null);
+
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+        setOpenCalendar(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="mt-5 flex justify-between">

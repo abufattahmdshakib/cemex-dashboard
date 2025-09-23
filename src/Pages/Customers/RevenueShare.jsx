@@ -64,7 +64,7 @@ const RevenueShare = () => {
                     <button
                         data-flash
                         onClick={() => setDropdownOpen(!dropdownOpen)}
-                        className="flex items-center shadow-sm gap-2 border-1 border-[#DBE0E5] bg-[#FFFFFF] text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
+                        className="flex items-center shadow-md  gap-2 border-1 border-[#DBE0E5] bg-[#FFFFFF] text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
                     >
                         Manage Row ({checkboxes.filter(c => c).length})
                         <FaChevronDown
@@ -95,7 +95,7 @@ const RevenueShare = () => {
             </div>
 
             {/* City Buttons */}
-            <div className="flex justify-around gap-2 py-7 border-y-1 border-[#DBE0E5] my-5">
+            <div className="flex justify-start gap-6 py-7 border-y-1 border-[#DBE0E5] my-5">
                 {cities.map((city) => (
                     <button
                         key={city}
@@ -111,7 +111,7 @@ const RevenueShare = () => {
             </div>
 
             {/* Table Card */}
-            <div className="bg-white shadow-sm rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
+            <div className="bg-white shadow-md  rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
                 <table className="w-full border-collapse">
                     <thead>
                         <tr className="bg-white text-left">

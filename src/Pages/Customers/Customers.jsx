@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { MdOutlineDateRange } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
 import dayPicker from "../../../src/assets/Day Picker.svg";
@@ -10,6 +10,20 @@ import Insights from './Insights';
 const Customers = () => {
     const [openCalendar, setOpenCalendar] = useState(false);
     const calendarRef = useRef(null);
+
+    // 👉 Close calendar on outside click
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+                setOpenCalendar(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     return (
         <div>
             <div className="mt-5 flex justify-between">
@@ -53,6 +67,7 @@ const Customers = () => {
                     </div>
                 </div>
             </div>
+
             <div className='my-8'>
                 <CustomersChart />
             </div>

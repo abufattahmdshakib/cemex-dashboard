@@ -9,11 +9,11 @@ import {
 } from "recharts";
 
 const chartOneData = [
-    { name: "৳10,000", value: 10000 },
-    { name: "৳50,000", value: 50000 },
-    { name: "৳100,000", value: 100000 },
-    { name: "৳500,000", value: 500000 },
-    { name: "৳500,000+", value: 500000 },
+    { name: "৳10,000", value: 20000 },
+    { name: "৳50,000", value: 30000 },
+    { name: "৳100,000", value: 10000 },
+    { name: "৳500,000", value: 50000 },
+    { name: "৳500,000+", value: 40000 },
 ];
 
 const orderFrequencyData = [
