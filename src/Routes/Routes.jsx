@@ -9,6 +9,7 @@ import Products from '../Pages/Products/Products';
 import ServiceArea from '../Pages/ServiceArea/ServiceArea';
 import AdminPanel from '../Pages/AdminPanel/AdminPanel';
 import Reports from '../Pages/Reports/Reports';
+import AiAssistant from '../Components/Navbar/AiAssistant/AiAssistant';
 
 
 
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "/Reports",
         element: <Reports />
+      },
+      {
+        path: "/AiAssistant",
+        element: <AiAssistant />
       },
     ],
   },
