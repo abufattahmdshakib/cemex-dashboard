@@ -98,7 +98,7 @@ const AIAssistantCardOne = () => {
           {actionsData.map((action, index) => (
             <div
               key={index}
-              className="flex items-center justify-between gap-4 py-4 border-t border-[#DBE0E5]"
+              className="flex items-start justify-between gap-4 py-4 border-t border-[#DBE0E5]"
             >
               {/* Left: title + description inline */}
               <div className="flex items-center ">

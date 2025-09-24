@@ -48,7 +48,7 @@ const CustomTick = ({ x, y, payload }) => {
 // Custom Bar Shape with only top border (uniform)
 const CustomBar = (props) => {
     const { fill, x, y, width, height } = props;
-    if (height <= 0) return null; // prevent negative or zero height bars
+    if (height <= 0) return null;
     return (
         <g>
             {/* Main Bar */}
@@ -56,7 +56,7 @@ const CustomBar = (props) => {
             {/* Top Border */}
             <line
                 x1={x}
-                y1={y + 1} // uniform top border
+                y1={y + 1}
                 x2={x + width}
                 y2={y + 1}
                 stroke="#6A0DAD"

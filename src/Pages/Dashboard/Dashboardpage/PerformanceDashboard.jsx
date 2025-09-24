@@ -125,7 +125,19 @@ const PerformanceDashboard = () => {
                             />
 
                             <YAxis hide />
-                            <Tooltip />
+                            {/* Tooltip add  */}
+                            <Tooltip
+                                cursor={{ fill: "transparent" }}
+                                contentStyle={{
+                                    backgroundColor: "transparent",
+                                    border: "none",
+                                    boxShadow: "none",
+                                    background: "white"
+                                }}
+                                labelStyle={{ color: "#333", fontWeight: 500 }}
+                                itemStyle={{ color: "#6A0DAD", fontWeight: 600 }}
+                                formatter={(value) => [`value:${value}`]}
+                            />
 
                             <Area
                                 type="monotone"

@@ -82,7 +82,7 @@ const DashboardCharts = () => {
               axisLine={false}
               tickLine={false}
             />
-            {/* Tooltip add korlam */}
+            {/* Tooltip add  */}
             <Tooltip
               cursor={{ fill: "transparent" }}
               contentStyle={{

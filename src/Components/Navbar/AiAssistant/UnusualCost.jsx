@@ -58,10 +58,10 @@ const UnusualCost = () => {
                     {unusualData.map((item, index) => (
                         <div
                             key={index}
-                            className="flex justify-between items-center gap-5"
+                            className="flex justify-between items-start gap-5"
                         >
                             {/* Left side: image + texts */}
-                            <div className="flex justify-between items-center gap-7">
+                            <div className="flex justify-between items-start gap-7">
                                 <div className="bg-[#F0F2F5] p-2 rounded-[8px]">
                                     <img src={item.img} alt={item.title} className="w-8 h-8" />
                                 </div>
@@ -97,10 +97,10 @@ const UnusualCost = () => {
                     {spikesData.map((item, index) => (
                         <div
                             key={index}
-                            className="flex justify-between items-center gap-5"
+                            className="flex justify-between items-start gap-5"
                         >
                             {/* Left side: image + texts */}
-                            <div className="flex justify-between items-center gap-7">
+                            <div className="flex justify-between items-start gap-7">
                                 <div className="bg-[#F0F2F5] p-2 rounded-[8px]">
                                     <img src={item.img} alt={item.title} className="w-8 h-8" />
                                 </div>

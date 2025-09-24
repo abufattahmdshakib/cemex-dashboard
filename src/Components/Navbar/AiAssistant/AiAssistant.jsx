@@ -2,6 +2,9 @@ import React from 'react';
 import documenticon from "../../../../src/assets/document-download.svg";
 import AIAssistantCardOne from './AIAssistantCardOne';
 import UnusualCost from './UnusualCost';
+import CustomerClusters from './CustomerClusters';
+import MarketingInsights from './MarketingInsights';
+import NewCampaign from './NewCampaign';
 
 const AiAssistant = () => {
     return (
@@ -30,6 +33,15 @@ const AiAssistant = () => {
             </div>
             <div className='mt-8'>
                 <UnusualCost />
+            </div>
+            <div className='mt-8'>
+                <CustomerClusters />
+            </div>
+            <div className='mt-8'>
+                <MarketingInsights />
+            </div>
+            <div className='my-8'>
+                <NewCampaign />
             </div>
 
         </div>
