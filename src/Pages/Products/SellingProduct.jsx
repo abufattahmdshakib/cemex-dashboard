@@ -1,14 +1,7 @@
 import React, { useRef, useState } from "react";
 import { MdOutlineDateRange } from "react-icons/md";
 import dayPicker from "../../../src/assets/Day Picker.svg";
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-} from "recharts";
+
 
 // List of cities
 const cities = [
@@ -23,60 +16,32 @@ const cities = [
   "Khulna",
 ];
 
-// Chart data
-const orderFrequencyData = [
-  { range: "Cemex Builder A1", value: 10000 },
-  { range: "Cemex Classic C1", value: 50000 },
-  { range: "Cemex Supreme S1", value: 500000 },
-  { value: 1000000 },
-  { value: 10000000 },
-  { value: 20000000 },
-];
-
-// Custom YAxis Tick
-const CustomTick = ({ x, y, payload }) => {
-  if (!payload.value) return null;
-  return (
-    <text
-      x={x - 130}
-      y={y}
-      textAnchor="start"
-      fill="black"
-      fontSize={12}
-      fontFamily="Montserrat"
-    >
-      {payload.value}
-    </text>
-  );
-};
-
-// Custom XAxis Tick – horizontal (no rotation)
-const CustomXTick = ({ x, y, payload }) => {
-  const formatCurrency = (num) =>
-    "৳" + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-  return (
-    <text
-      x={x - 15}
-      y={y}
-      textAnchor="end"
-      fill="#757575"
-      fontSize={12}
-      fontWeight={600}
-      fontFamily="Montserrat"
-    >
-      {formatCurrency(payload.value)}
-    </text>
-  );
-};
-
 const SellingProduct = () => {
   const [selectedCity, setSelectedCity] = useState("All");
   const [openCalendar, setOpenCalendar] = useState(false);
   const calendarRef = useRef(null);
 
-  // Define manual ticks (no auto)
-  const xTicks = [10000, 50000, 500000, 1000000, 10000000, 20000000];
+  const data = [
+    { name: 'Cemex Builder A1', value: 20000000, color: '#E8DEEE' },
+    { name: 'Cemex Classic C1', value: 8000000, color: '#E8DEEE' },
+    { name: 'Cemex Supreme S1', value: 15000000, color: '#E8DEEE' },
+  ];
+
+
+  const maxValue = 20000000;
+  const ticks = [10000, 50000, 500000, 1000000, 10000000, 20000000];
+
+  const formatValue = (value) => {
+    if (value >= 1000000) {
+      return `৳${(value / 1000000).toFixed(0)},000,000`;
+    } else if (value >= 1000) {
+      return `৳${(value / 1000).toFixed(0)},000`;
+    } else {
+      return `৳${value}`;
+    }
+  };
+
+
 
   return (
     <div className="montserrat-fontsfamily border p-5 border-[#DBE0E5] shadow-sm rounded-[12px]">
@@ -127,78 +92,55 @@ const SellingProduct = () => {
         ))}
       </div>
 
-      {/* Chart */}
-      <div className="w-full mx-auto bg-white">
-        <ResponsiveContainer width="100%" height={200}>
-          <BarChart
-            data={orderFrequencyData}
-            layout="vertical"
-            margin={{ top: 20, right: 20, left: 20, }}
-          >
-            {/* YAxis */}
-            <YAxis
-              dataKey="range"
-              type="category"
-              tick={<CustomTick />}
-              axisLine={false}
-              tickLine={false}
-              width={150}
-            />
+      {/* chart */}
+      <div className="w-full mt-8 bg-white">
+        <div className="space-y-6">
+          {data.map((item, index) => (
+            <div key={index} className="flex items-center space-x-4">
+              {/* Left side label */}
+              <div className="w-40 text-[12px] text-[#757575] font-[500] pl-6">
+                {item.name}
+              </div>
 
-            {/* XAxis – FULL manual control */}
-            <XAxis
-              type="category"
-              ticks={xTicks}
-              tick={<CustomXTick />}
-              axisLine={false}
-              tickLine={false}
-              interval={0}
-              allowDecimals={false}
-              tickMargin={5} // smaller tick margin
-            />
+              {/* Right side bar */}
+              <div className="flex-1 relative">
+                {/* Background track */}
+                <div className="w-full h-9"></div>
 
-            {/* Tooltip */}
-            <Tooltip
-              cursor={{ fill: "transparent" }}
-              contentStyle={{
-                backgroundColor: "white",
-                border: "1px solid #DBE0E5",
-                borderRadius: "2px",
-              }}
-              labelStyle={{ color: "#121417", fontWeight: 600 }}
-              itemStyle={{ color: "#6A0DAD", fontWeight: 500 }}
-              formatter={(value) => [`৳${value.toLocaleString()}`, "value"]}
-            />
+                {/* Filled bar */}
+                <div
+                  className="absolute top-0 left-0 h-8 transition-all duration-500 ease-out"
+                  style={{
+                    width: `${(item.value / maxValue) * 100}%`,
+                    backgroundColor: item.color,
+                  }}
+                ></div>
 
-            {/* Custom Bar */}
-            <Bar
-              dataKey="value"
-              fill="#E8DEEE"
-              barSize={30}
-              minPointSize={10}
-              shape={(props) => {
-                const { fill, x, y, width, height } = props;
-                if (height <= 0) return null;
-                return (
-                  <g>
-                    <rect x={x} y={y} width={width} height={height} fill={fill} />
-                    <line
-                      x1={x + width}
-                      y1={y}
-                      x2={x + width}
-                      y2={y + height}
-                      stroke="#6A0DAD"
-                      strokeWidth={2}
-                    />
-                  </g>
-                );
-              }}
-            />
-          </BarChart>
-        </ResponsiveContainer>
+                {/* End marker */}
+                <div
+                  className="absolute top-0 w-[2px] h-8 bg-[#6A0DAD] "
+                  style={{ left: `${(item.value / maxValue) * 100}%` }}
+                ></div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* X-axis labels */}
+        <div className="relative mt-6 h-6">
+          <div className="absolute inset-0 flex justify-between left-44 text-[12px] text-[#757575] font-[600]">
+            {ticks.map((tick, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <div className="text-center">{formatValue(tick)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default SellingProduct;
+
+

@@ -1,6 +1,7 @@
 import React from 'react';
 import documenticon from "../../../../src/assets/document-download.svg";
 import AIAssistantCardOne from './AIAssistantCardOne';
+import UnusualCost from './UnusualCost';
 
 const AiAssistant = () => {
     return (
@@ -26,6 +27,9 @@ const AiAssistant = () => {
             </div>
             <div className='mt-8'>
                 <AIAssistantCardOne />
+            </div>
+            <div className='mt-8'>
+                <UnusualCost />
             </div>
 
         </div>

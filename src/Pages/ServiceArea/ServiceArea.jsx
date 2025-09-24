@@ -8,6 +8,7 @@ import RevenueShare from './RevenueShare';
 import DashboardCards from '../Dashboard/Dashboardpage/DashboardCards ';
 import ServiceAreaCharts from './ServiceAreaCharts';
 import ServiceAreaManage from './ServiceAreaManage';
+import SellingProduct from './SellingProduct';
 
 const ServiceArea = () => {
     return (
@@ -20,6 +21,9 @@ const ServiceArea = () => {
             </div>
             <div className='my-8'>
                 <ServiceAreaCharts />
+            </div>
+            <div className='my-8'>
+                <SellingProduct />
             </div>
             <div className="my-8">
                 <RevenueShare />
