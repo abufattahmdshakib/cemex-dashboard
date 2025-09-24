@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { MdOutlineDateRange } from "react-icons/md";
-import documenticon from "../../../../src/assets/document-download.svg"; 
+import documenticon from "../../../../src/assets/document-download.svg";
 import dayPicker from "../../../../src/assets/Day Picker.svg";
 
 const WelcomeSection = () => {
@@ -47,7 +47,7 @@ const WelcomeSection = () => {
         <div data-flash className="relative" ref={calendarRef}>
           <button
             onClick={() => setOpenCalendar(!openCalendar)}
-            className="montserrat-fontsfamily bg-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center gap-2 text-[#121417] text-[14px] font-[500]"
+            className="montserrat-fontsfamily border-[1.5px] border-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center gap-2 text-[#121417] text-[14px] font-[500]"
           >
             Nov 25, 2023 - Oct 31, 2024{" "}
             <span className="text-[#757575] text-[20px]">

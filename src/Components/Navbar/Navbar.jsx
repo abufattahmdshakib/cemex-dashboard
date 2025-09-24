@@ -39,11 +39,11 @@ const Navbar = () => {
           <div className="relative overflow-visible">
             <div
               data-flash
-              onClick={() => setShowSearch((prev) => !prev)}
               className={`flex items-center bg-[#F0F2F5] rounded-md transition-all duration-500 overflow-hidden
                 ${showSearch ? "w-60 px-2" : "w-[48px]"}`}
             >
               <button
+               onClick={() => setShowSearch((prev) => !prev)}
                 className={`text-[22px] font-[800] text-[#121417] transition-all duration-500
                 ${showSearch ? "ml-2 mr-2" : "mx-auto"}`}
               >

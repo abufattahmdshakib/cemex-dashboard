@@ -3,23 +3,23 @@ import { FaChevronDown } from "react-icons/fa";
 
 // Table data
 const divisionalData = [
-    { area: "Dhaka", orders: 15215, profit: 16709000, margin: 30, delivery: "1.4 days", growth: "+87.6%" },
-    { area: "Sylhet", orders: 15215, profit: 6345000, margin: 33, delivery: "1.2 days", growth: "+62%" },
-    { area: "Chattogram", orders: 15215, profit: 9597320, margin: 25, delivery: "1.0 days", growth: "+59.9%" },
-    { area: "Barisal", orders: 15215, profit: 7545000, margin: 23, delivery: "1.8 days", growth: "+50%" },
-    { area: "Mymensingh", orders: 15215, profit: 6000597, margin: 18, delivery: "1.2 days", growth: "+47%" },
-    { area: "Rajshahi", orders: 15215, profit: 4500000, margin: 16, delivery: "1.0 days", growth: "+12.4%" },
-    { area: "Rangpur", orders: 15215, profit: 1550000, margin: 3, delivery: "1.6 days", growth: "-17.9%" },
-    { area: "Khulna", orders: 15215, profit: 950000, margin: 2.7, delivery: "1.0 days", growth: "-26.3%" },
+    { area: "Dhaka", orders: 15215, Processing: "1.5 hours", Satisfaction: 5.0, delivery: "1.4 days", growth: "+87.6%" },
+    { area: "Sylhet", orders: 15215, Processing: "1.3 hours", Satisfaction: 4.9, delivery: "1.2 days", growth: "+62%" },
+    { area: "Chattogram", orders: 15215, Processing: "2.4 hours", Satisfaction: 4.7, delivery: "1.0 days", growth: "+59.9%" },
+    { area: "Barisal", orders: 15215, Processing: "2.6 hours", Satisfaction: 4.3, delivery: "1.8 days", growth: "+50%" },
+    { area: "Mymensingh", orders: 15215, Processing: "1.5 hours", Satisfaction: 4.3, delivery: "1.2 days", growth: "+47%" },
+    { area: "Rajshahi", orders: 15215, Processing: "3.2 hours", Satisfaction: 4.0, delivery: "1.0 days", growth: "+12.4%" },
+    { area: "Rangpur", orders: 15215, Processing: "2.8 hours", Satisfaction: 3.7, delivery: "1.6 days", growth: "-17.9%" },
+    { area: "Khulna", orders: 15215, Processing: "3.6 hours", Satisfaction: 3.4, delivery: "1.0 days", growth: "-26.3%" },
 ];
 
 // Columns to display in the **table**
 const tableColumns = [
     { label: "Area Coverage", key: "area" },
     { label: "Orders", key: "orders" },
-    { label: "Profit", key: "profit" },
-    { label: "Profit Margin", key: "margin" },
+    { label: "Processing Time", key: "Processing" },
     { label: "Delivery Time", key: "delivery" },
+    { label: "Avg. Satisfaction", key: "Satisfaction" },
     { label: "Avg. Growth", key: "growth" },
 ];
 
@@ -27,17 +27,16 @@ const tableColumns = [
 const dropdownColumns = [
     { label: "Area Coverage", key: "area" },
     { label: "Orders", key: "orders" },
-    { label: "Profit", key: "profit" },
-    { label: "Profit Margin", key: "margin" },
-    { label: "Delivery Time", key: "delivery" },
     { label: "Processing Time", key: "Processing" },
-    { label: "Avg. Satisfaction", key: "Avg" },
-    { label: "Avg. Growth", key: "growth" },
+    { label: "Delivery Time", key: "Delivery" },
+    { label: "Avg. Satisfaction", key: "Satisfaction" },
+    { label: "Avg. Growth", key: "Growth" },
+    { label: "Product Return", key: "Product" },
 ];
 
-const DivisionalSales = () => {
+const Efficiency = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [checkboxes, setCheckboxes] = useState([true, true, true, true, true, false, false, true]);
+    const [checkboxes, setCheckboxes] = useState([true, true, true, true, true, true, false]);
     const dropdownRef = useRef(null);
 
     // Close dropdown when clicking outside
@@ -54,8 +53,8 @@ const DivisionalSales = () => {
     return (
         <div className="montserrat-fontsfamily">
             {/* Header */}
-            <div className="flex justify-between items-center mt-12 mb-8">
-                <h1 className="text-[22px] text-[#1D3557] font-[700]">Divisional Sales and Growth Potential</h1>
+            <div className="flex justify-between items-center mt-12 mb-8 border-y-1 border-[#DBE0E5] py-5">
+                <h1 className="text-[22px] text-[#1D3557] font-[700]">Divisional Operational Efficiency</h1>
 
                 {/* Manage Row Button */}
                 <div className="relative" ref={dropdownRef}>
@@ -119,8 +118,8 @@ const DivisionalSales = () => {
                                     <td
                                         key={col.key}
                                         className={`px-4 py-3 border-b border-[#E5E8EB] text-[14px] font-[500] ${col.key === "area"
-                                                ? "text-[#121417] underline"
-                                                : "text-[#757575]"
+                                            ? "text-[#121417] underline"
+                                            : "text-[#757575]"
                                             }`}
                                     >
                                         {col.key === "profit"
@@ -151,4 +150,4 @@ const DivisionalSales = () => {
     );
 };
 
-export default DivisionalSales;
+export default Efficiency;

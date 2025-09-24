@@ -53,18 +53,19 @@ const AdminPanel = () => {
                     </thead>
                     <tbody>
                         {currentData.map((row, rowIdx) => {
-                            const isActive = row.id === activeRowId; // active row check
+                            const isActive = row.id === activeRowId;
                             return (
                                 <tr
                                     key={row.id}
-                                    className={` ${isActive ? "bg-gray-300" : " hover:bg-gray-100"}`}
+                                    className={`${isActive ? "bg-gray-200" : "hover:bg-gray-100"}`}
                                     onClick={() => setActiveRowId(row.id)}
                                 >
                                     {tableColumns.map((col, colIdx) => (
                                         <td
                                             key={col.key}
-                                            className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${colIdx === 0 ? "text-[#121417]" : "text-[#757575]"
-                                                }`}
+                                            className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] 
+              ${isActive ? "text-[#121417] font-[600]" : colIdx === 0 ? "text-[#121417]" : "text-[#757575]"}
+              ${col.key === "email" ? "underline" : ""}`}
                                         >
                                             {col.key === "update" ? (
                                                 rowIdx === 0 ? null : (
@@ -72,7 +73,11 @@ const AdminPanel = () => {
                                                         className={`flex items-center justify-center w-10 h-10 p-2 rounded-[12px] ${isActive ? "bg-white" : "bg-[#E5E8EB]"
                                                             }`}
                                                     >
-                                                        <img src={row[col.key]} alt="edit" className="w-5 h-5 cursor-pointer" />
+                                                        <img
+                                                            src={row[col.key]}
+                                                            alt="edit"
+                                                            className="w-5 h-5 cursor-pointer"
+                                                        />
                                                     </div>
                                                 )
                                             ) : (

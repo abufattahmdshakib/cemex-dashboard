@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { MdOutlineDateRange } from "react-icons/md";
 import dayPicker from "../../../src/assets/Day Picker.svg";
 import {
@@ -75,24 +75,11 @@ const SellingProduct = () => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const calendarRef = useRef(null);
 
-  // outside click handler
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
-        setOpenCalendar(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
   // Define manual ticks (no auto)
   const xTicks = [10000, 50000, 500000, 1000000, 10000000, 20000000];
 
   return (
-    <div className="montserrat-fontsfamily border p-5 border-[#DBE0E5] shadow-md  rounded-[12px]">
+    <div className="montserrat-fontsfamily border p-5 border-[#DBE0E5] shadow-sm rounded-[12px]">
       <div className="flex justify-between items-center">
         {/* Header */}
         <h1 className="text-[16px] text-[#121417] text-left font-[700]">
@@ -102,7 +89,7 @@ const SellingProduct = () => {
         <div data-flash className="relative" ref={calendarRef}>
           <button
             onClick={() => setOpenCalendar(!openCalendar)}
-            className="montserrat-fontsfamily bg-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center gap-2 text-[#121417] text-[14px] font-[500]"
+            className="montserrat-fontsfamily border-[1.5px] border-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center gap-2 text-[#121417] text-[14px] font-[500]"
           >
             Nov 25, 2023 - Oct 31, 2024{" "}
             <span className="text-[#757575] text-[20px]">
@@ -130,11 +117,10 @@ const SellingProduct = () => {
           <button
             key={city}
             onClick={() => setSelectedCity(city)}
-            className={`px-4 py-2 rounded text-[12px] font-[500] ${
-              selectedCity === city
-                ? "bg-[#1D3557] text-white border-[#1D3557]"
-                : "bg-[#F0F2F5] text-[#121417] border-[#F0F2F5]"
-            }`}
+            className={`px-4 py-2 rounded text-[12px] font-[500] ${selectedCity === city
+              ? "bg-[#1D3557] text-white border-[#1D3557]"
+              : "bg-[#F0F2F5] text-[#121417] border-[#F0F2F5]"
+              }`}
           >
             {city}
           </button>
@@ -147,7 +133,7 @@ const SellingProduct = () => {
           <BarChart
             data={orderFrequencyData}
             layout="vertical"
-            margin={{ top: 20, right: 20 }}
+            margin={{ top: 20, right: 20, left: 20, }}
           >
             {/* YAxis */}
             <YAxis
@@ -168,7 +154,7 @@ const SellingProduct = () => {
               tickLine={false}
               interval={0}
               allowDecimals={false}
-              tickMargin={5}
+              tickMargin={5} // smaller tick margin
             />
 
             {/* Tooltip */}

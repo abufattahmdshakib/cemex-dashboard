@@ -72,7 +72,7 @@ const RevenueShare = () => {
                             {allColumns.map((col, index) => (
                                 <label
                                     key={col.key}
-                                    className="flex items-center justify-between px-4 py-2 hover:bg-gray-100 cursor-pointer text-[#121417] text-[14px]"
+                                    className="flex items-center justify-between px-4 py-2 hover:bg-gray-100 cursor-pointer text-[#121417] text-[14px] font-[600]"
                                 >
                                     <span className="flex items-center gap-2">
                                         <input

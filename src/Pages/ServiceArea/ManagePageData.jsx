@@ -57,7 +57,7 @@ const ManagePageData = () => {
       <button
         data-flash
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        className="flex items-center gap-2 border border-[#DBE0E5] font-[500] bg-white text-[14px] text-[#121417] px-5 py-2 rounded-[8px]"
+        className="flex items-center gap-2 border-[1.5px] border-[#DBE0E5] font-[500] bg-white text-[14px] text-[#121417] px-5 py-2 rounded-[8px]"
       >
         Manage Page Data
         <FaChevronDown

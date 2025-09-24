@@ -5,12 +5,12 @@ import dayPicker from "../../../src/assets/Day Picker.svg";
 import ManagePageData from './ManagePageData';
 
 const cities = [
-    "All", "Dhaka", "Sylhet", "Chattogram", "Barisal", "Mymensingh", "Rajshahi", "Rangpur", "Khulna",
+     "Dhaka", "Sylhet", "Chattogram", "Barisal", "Mymensingh", "Rajshahi", "Rangpur", "Khulna",
 ];
 
 const ServiceAreaManage = () => {
     const [openCalendar, setOpenCalendar] = useState(false);
-    const [selectedCity, setSelectedCity] = useState("All"); // <-- top-level state
+    const [selectedCity, setSelectedCity] = useState("Dhaka"); // <-- top-level state
     const calendarRef = useRef(null);
 
     // Close dropdown if clicked outside
@@ -34,7 +34,7 @@ const ServiceAreaManage = () => {
                 </h1>
                 <div>
                     {/* Export & Calendar Button */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-4">
                         {/* Export CSV */}
                         <p className="montserrat-fontsfamily text-white font-semibold text-[14px] rounded-[8px] bg-[#1D3557] w-38 flex items-center justify-center gap-2 py-2 px-4 cursor-pointer">
                             Export CSV{" "}
@@ -49,7 +49,7 @@ const ServiceAreaManage = () => {
                         <div data-flash className="relative" ref={calendarRef}>
                             <button
                                 onClick={() => setOpenCalendar(!openCalendar)}
-                                className="montserrat-fontsfamily bg-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center gap-2 text-[#121417] text-[14px] font-[500]"
+                                className="montserrat-fontsfamily  border-[1.5px] border-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center gap-2 text-[#121417] text-[14px] font-[500]"
                             >
                                 Nov 25, 2023 - Oct 31, 2024{" "}
                                 <span className="text-[#757575] text-[20px]">
