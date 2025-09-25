@@ -26,7 +26,7 @@ const AdminPanel = () => {
     for (let i = startPage; i <= endPage; i++) visiblePages.push(i);
 
     return (
-        <div className="montserrat-fontsfamily mb-12">
+        <div className="montserrat-fontsfamily mt-8 mb-12">
             {/* Header */}
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-[22px] text-[#1D3557] font-[700]">Admin Panel</h1>

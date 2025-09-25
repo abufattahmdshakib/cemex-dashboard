@@ -1,21 +1,22 @@
 import React from "react";
 import { BsArrowUpRight } from "react-icons/bs";
-
+import trenddown from '../../../../src/assets/trend-down.svg';
+import trendup from '../../../../src/assets/trend-up.svg';
 const unusualData = [
     {
-        img: "../../../../src/assets/trend-down.svg",
+        img: trenddown,
         title: "Order drop",
         sub: "View division",
         description: "Order are down 12% in the last 30 days.",
     },
     {
-        img: "../../../../src/assets/trend-up.svg",
+        img: trendup,
         title: "Cost spike",
         sub: "View division",
         description: "Cost are up 10% in the last 30 days.",
     },
     {
-        img: "../../../../src/assets/trend-down.svg",
+        img: trenddown,
         title: "Margin erosion",
         sub: "View division",
         description: "Margin is down 8% in the last 30 days.",
@@ -23,19 +24,19 @@ const unusualData = [
 ];
 const spikesData = [
     {
-        img: "../../../../src/assets/trend-down.svg",
+        img: trenddown,
         title: "Order volume drop",
         sub: "View division",
         description: "Total orders have decreased by 12% over the last 30 days.",
     },
     {
-        img: "../../../../src/assets/trend-up.svg",
+        img: trendup,
         title: "Operational cost spike",
         sub: "View division",
         description: "Overall costs have increased by 10% in the last 30 days.",
     },
     {
-        img: "../../../../src/assets/trend-down.svg",
+        img: trenddown,
         title: "Profit margin erosion",
         sub: "View division",
         description: "Profit margins declined by 8% during the last 30 days.",
