@@ -8,8 +8,8 @@ import ChatAssistant from "../ChatAssistant/ChatAssistant";
 const DashboardLayout = () => {
     return (
         <div className="flex flex-col h-screen">
-              {/* Global flash system */}
-                  <FlashEffect />
+            {/* Global flash system */}
+            <FlashEffect />
             {/* Navbar always at top full width */}
             <div className="montserrat-fontsfamily fixed top-0 left-0 right-0 z-50 h-20">
                 <Navbar />
@@ -18,7 +18,7 @@ const DashboardLayout = () => {
             {/* Main Section */}
             <div className="montserrat-fontsfamily flex flex-1 pt-20">
                 {/* Sidebar starts just below Navbar */}
-                <div className="hide-scrollbar w-64 mx-auto fixed top-20 left-0 h-[calc(100%-90px)] bg-white overflow-y-auto">
+                <div className="hide-scrollbar w-64 mx-auto fixed top-20 bottom-0 left-0 bg-white overflow-y-auto">
                     <Sidebar />
                 </div>
 
@@ -27,7 +27,7 @@ const DashboardLayout = () => {
                     <Outlet />
                 </div>
                 <div>
-                    <ChatAssistant /> 
+                    <ChatAssistant />
                 </div>
 
             </div>

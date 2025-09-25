@@ -185,16 +185,15 @@ const Sidebar = () => {
         {/* Toggle button for Section Two */}
         <button
           onClick={() => setOpenExtra(!openExtra)}
-          className="montserrat-fontsfamily w-full flex items-center mt-4 px-2 font-[400] text-[14px] transition"
+          className="montserrat-fontsfamily w-full flex items-center mt-4 px-2 font-[400] text-[14px] text-[#121417] transition"
         >
           <span>{openExtra ? "Less" : "More"}</span>
           <RiArrowDropDownLine
-            className={`transition-transform duration-300 ${openExtra ? "rotate-180" : "rotate-0"
+            className={`transition-transform duration-300 text-[#121417] ${openExtra ? "rotate-180" : "rotate-0"
               }`}
             size={20}
           />
         </button>
-
         {/* Section Two (slide toggle) */}
         <div
           className={`transition-all duration-500 overflow-hidden ${openExtra ? "max-h-96 mt-3" : "max-h-0"

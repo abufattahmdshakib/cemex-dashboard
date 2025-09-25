@@ -55,7 +55,7 @@ const ChatAssistant = () => {
     }, [messages]);
 
     return (
-        <div data-flash className="fixed bottom-5 right-5 z-50">
+        <div data-flash className=" fixed bottom-5 right-5 z-50">
             {!open && (
                 <button
                     onClick={() => setOpen(true)}
