@@ -1,17 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import iconlogo from "../../../src/assets/Vector.svg";
 import search from "../../../src/assets/search-normal.svg";
 import notification from "../../../src/assets/notification-bing.svg";
+import Logout from "../../../src/assets/logout.svg";
+import Settings from "../../../src/assets/setting-2.svg";
+import user from "../../../src/assets/dropuser.svg";
 import Inbox from "../../../src/assets/direct-inbox.svg";
 import { BsStars } from "react-icons/bs";
+import { FaUserEdit, FaCog, FaSignOutAlt } from "react-icons/fa";
 
 const Navbar = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [aiHidden, setAiHidden] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     if (location.pathname === "/AiAssistant") {
@@ -20,6 +26,16 @@ const Navbar = () => {
       setAiHidden(false);
     }
   }, [location]);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div className="border-b-2 border-[#DBE0E5]">
@@ -74,7 +90,8 @@ const Navbar = () => {
             </button>
 
             {/* AI Assistant */}
-            <div data-flash
+            <div
+              data-flash
               onClick={() => navigate("/AiAssistant")}
               className={`montserrat-fontsfamily flex items-center gap-2 bg-gradient-to-r from-[#6A0DAD] to-[#FF5C93] 
         px-4 py-[6px] rounded-md text-[22px] font-medium text-[#FFFFFF] transform 
@@ -86,17 +103,41 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* User */}
-          <button
-            data-flash
-            className="montserrat-fontsfamily text-[24px] font-[700] bg-[#F0F2F5] py-[5px] px-4 rounded-md text-[#1D3557]"
-          >
-            R
-          </button>
-        </div>
+          {/* User with Dropdown */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              data-flash
+              onClick={() => setDropdownOpen((prev) => !prev)}
+              className="montserrat-fontsfamily text-[24px] font-[700] bg-[#F0F2F5] py-[5px] px-4 rounded-md text-[#1D3557]"
+            >
+              R
+            </button>
 
+            {dropdownOpen && (
+              <div className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-[8px] shadow-lg p-6 z-50 animate-fade-in">
+                <div className="mb-3 border-b border-gray-200 pb-3">
+                  <h2 className="text-[18px] font-[600] text-[#1D3557]">Mr. Rahman</h2>
+                  <p className="text-[12px] font-[500] text-[#757575]">CEO of Cemex</p>
+                  <p className="text-[14px] font-[500] text-[#121417]">rahman@cemex.com</p>
+                </div>
+
+                <ul className="space-y-2">
+                  <li className="flex items-center gap-4 text-[#121417]  text-[14px] font-[500] transition border-t border-[#DBE0E5] pt-2">
+                    <span><img src={user} alt="" /></span> Profile Edit
+                  </li>
+                  <li className="flex items-center gap-4 text-[#121417]  text-[14px] font-[500] transition border-t border-[#DBE0E5] pt-2">
+                    <span><img src={Settings} alt="" /></span> Settings
+                  </li>
+                  <li className="flex items-center gap-4 text-[#E74C3C] text-[14px] font-[500] transition border-t border-[#DBE0E5] pt-2">
+                    <span><img src={Logout} alt="" /></span> Logout
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-    </div >
+    </div>
   );
 };
 

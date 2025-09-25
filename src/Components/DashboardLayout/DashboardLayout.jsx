@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Sidebar from "../Navbar/Sidebar";
 import FlashEffect from "../FlashEffect/FlashEffect";
+import ChatAssistant from "../ChatAssistant/ChatAssistant";
 
 const DashboardLayout = () => {
     return (
@@ -24,6 +25,9 @@ const DashboardLayout = () => {
                 {/* Main content (scrollable) */}
                 <div className="montserrat-fontsfamily hide-scrollbar flex-1 ml-64 overflow-y-auto p-6 bg-[#FFFFFF] scrollbar-none">
                     <Outlet />
+                </div>
+                <div>
+                    <ChatAssistant /> 
                 </div>
 
             </div>

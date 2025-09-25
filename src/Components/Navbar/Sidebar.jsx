@@ -35,7 +35,7 @@ const Sidebar = () => {
         <ul className="space-y-2 mt-2 mb-10">
           <li>
             <NavLink
-            data-flash
+              data-flash
               to="/"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -56,7 +56,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-            data-flash
+              data-flash
               to="/orders"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -77,7 +77,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-            data-flash
+              data-flash
               to="/customers"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -98,7 +98,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-            data-flash
+              data-flash
               to="/products"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -119,7 +119,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-            data-flash
+              data-flash
               to="/ServiceArea"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -140,7 +140,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-            data-flash
+              data-flash
               to="/AdminPanel"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -161,7 +161,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-            data-flash
+              data-flash
               to="/reports"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -182,7 +182,7 @@ const Sidebar = () => {
           </li>
         </ul>
 
-         {/* Toggle button for Section Two */}
+        {/* Toggle button for Section Two */}
         <button
           onClick={() => setOpenExtra(!openExtra)}
           className="montserrat-fontsfamily w-full flex items-center mt-4 px-2 font-[400] text-[14px] transition"
@@ -202,60 +202,28 @@ const Sidebar = () => {
         >
           <ul className="space-y-1">
             <li>
-              <NavLink
-                to="/settings"
-                className={({ isActive }) =>
-                  `${linkClasses} ${isActive ? activeClasses : ""}`
-                }
-                style={({ isActive }) =>
-                  isActive ? { color: "#1D3557" } : {}
-                }
-              >
+              <div className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-gray-100 cursor-default">
                 <img className="w-7" src={Settings} alt="" />
-                Settings
-              </NavLink>
+                <span className="text-[#1D3557]">Settings</span>
+              </div>
             </li>
             <li>
-              <NavLink
-                to="/team-hub"
-                className={({ isActive }) =>
-                  `${linkClasses} ${isActive ? activeClasses : ""}`
-                }
-                style={({ isActive }) =>
-                  isActive ? { color: "#1D3557" } : {}
-                }
-              >
+              <div className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-gray-100 cursor-default">
                 <img className="w-7" src={TeamHub} alt="" />
-                Team Hub
-              </NavLink>
+                <span className="text-[#1D3557]">Team Hub</span>
+              </div>
             </li>
             <li>
-              <NavLink
-                to="/help"
-                className={({ isActive }) =>
-                  `${linkClasses} ${isActive ? activeClasses : ""}`
-                }
-                style={({ isActive }) =>
-                  isActive ? { color: "#1D3557" } : {}
-                }
-              >
+              <div className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-gray-100 cursor-default">
                 <img className="w-7" src={HelpFeedback} alt="" />
-                Help & Feedback
-              </NavLink>
+                <span className="text-[#1D3557]">Help & Feedback</span>
+              </div>
             </li>
             <li>
-              <NavLink
-                to="/invite"
-                className={({ isActive }) =>
-                  `${linkClasses} ${isActive ? activeClasses : ""}`
-                }
-                style={({ isActive }) =>
-                  isActive ? { color: "#1D3557" } : {}
-                }
-              >
+              <div className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-gray-100 cursor-default">
                 <img className="w-7" src={InviteTeam} alt="" />
-                Invite Team
-              </NavLink>
+                <span className="text-[#1D3557]">Invite Team</span>
+              </div>
             </li>
           </ul>
         </div>

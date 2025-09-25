@@ -47,7 +47,7 @@ const NewCampaign = () => {
                             </h2>
                             <p className="text-[#757575] text-[12px] font-[500] mt-1">{item.subtitle}</p>
 
-                            <button className="mt-7 px-5 py-3 rounded-[8px] bg-[#F0F2F5] inline-flex items-center gap-3 text-[#121417] font-[500] text-[12px]">
+                            <button className="mt-7 px-5 py-3 rounded-[8px] bg-[#F0F2F5] inline-flex items-center gap-3 text-[#121417] font-[500] text-[12px] hover:bg-gray-200">
                                 {item.button}
                                 <BsArrowUpRight size={18} />
                             </button>
