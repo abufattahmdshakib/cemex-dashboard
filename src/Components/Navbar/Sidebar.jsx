@@ -35,7 +35,7 @@ const Sidebar = () => {
         <ul className="space-y-2 mt-2 mb-10">
           <li>
             <NavLink
-              data-flash
+             
               to="/"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -56,7 +56,6 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              data-flash
               to="/orders"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -77,7 +76,6 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              data-flash
               to="/customers"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -98,7 +96,6 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              data-flash
               to="/products"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -119,7 +116,6 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              data-flash
               to="/ServiceArea"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -140,7 +136,6 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              data-flash
               to="/AdminPanel"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -161,7 +156,6 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              data-flash
               to="/reports"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : ""}`
@@ -185,7 +179,7 @@ const Sidebar = () => {
         {/* Toggle button for Section Two */}
         <button
           onClick={() => setOpenExtra(!openExtra)}
-          className="montserrat-fontsfamily w-full flex items-center mt-4 px-2 font-[400] text-[14px] text-[#121417] transition"
+          className="cursor-pointer montserrat-fontsfamily w-full flex items-center mt-4 px-2 font-[400] text-[14px] text-[#121417] transition"
         >
           <span>{openExtra ? "Less" : "More"}</span>
           <RiArrowDropDownLine

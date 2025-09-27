@@ -55,11 +55,11 @@ const ChatAssistant = () => {
     }, [messages]);
 
     return (
-        <div data-flash className=" fixed bottom-5 right-5 z-50">
+        <div className=" fixed bottom-5 right-5 z-50">
             {!open && (
                 <button
                     onClick={() => setOpen(true)}
-                    className="flex items-center gap-2 text-[14px] font-[600] bg-gradient-to-r from-[#6A0DAD] to-[#FF5C93] text-[#FFFFFF] px-4 py-3 rounded-[32px_5px_32px_5px] shadow-lg hover:scale-105 transition"
+                    className="flex cursor-pointer items-center gap-2 text-[14px] font-[600] bg-gradient-to-r from-[#6A0DAD] to-[#FF5C93] text-[#FFFFFF] px-4 py-3 rounded-[32px_5px_32px_5px] shadow-lg hover:scale-105 transition"
 
                 >
                     <span><img src={messagesicon} alt="" /></span>
@@ -91,7 +91,7 @@ const ChatAssistant = () => {
                             )}
                             <button
                                 onClick={handleClear}
-                                className="text-[16px] text-[#757575] flex items-center gap-1"
+                                className="text-[16px] text-[#757575] flex items-center gap-1 cursor-pointer"
                             >
                                 <span><MdOutlineRestartAlt className="text-[18px]" /></span>
                                 Clear chat
@@ -151,7 +151,7 @@ const ChatAssistant = () => {
                                             { sender: "ai", text: "Good question! Let me check..." },
                                         ])
                                     }
-                                    className="w-full border-[#DBE0E5] text-center border px-3 py-2 rounded-[10px] text-[11px] text-[#121417] transition"
+                                    className="w-full border-[#DBE0E5] text-center border px-3 py-2 rounded-[10px] text-[11px] text-[#121417] transition cursor-pointer"
                                 >
                                     {q}
                                 </button>
@@ -166,12 +166,12 @@ const ChatAssistant = () => {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Let the magic begin, Ask a question"
-                            className="w-full px-3 py-2 pr-10 rounded-[8px] border border-[#DBE0E5] focus:outline-none text-[12px] text-[#757575]"
+                            className="w-full px-3 py-2 pr-10 rounded-[8px] border border-[#DBE0E5] focus:outline-none text-[12px] text-[#757575] cursor-pointer"
                             onKeyDown={(e) => e.key === "Enter" && handleSend()}
                         />
                         <button
                             onClick={handleSend}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6A0DAD] hover:text-[#FF5C93]"
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6A0DAD] hover:text-[#FF5C93] cursor-pointer"
                         >
                             <IoSend size={18} />
                         </button>

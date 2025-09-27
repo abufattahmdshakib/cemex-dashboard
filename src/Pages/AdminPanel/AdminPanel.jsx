@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight, FaChevronDown, FaPlus } from "react-icons/fa";
 import { tableColumns, orderData } from "./CustomersTableData";
+import Swal from "sweetalert2";
 
 const AdminPanel = () => {
     const [activeRowId, setActiveRowId] = useState(null);
@@ -71,7 +72,16 @@ const AdminPanel = () => {
                                                 rowIdx === 0 ? null : (
                                                     <div
                                                         className={`flex items-center justify-center w-10 h-10 p-2 rounded-[12px] ${isActive ? "bg-white" : "bg-[#E5E8EB]"
-                                                            }`}
+                                                            } cursor-pointer`}
+                                                        onClick={(e) => {
+                                                            e.stopPropagation(); // prevents triggering row click
+                                                            Swal.fire({
+                                                                title: "Update Details",
+                                                                text: "No update available",
+                                                                icon: "info",
+                                                                confirmButtonColor: "#1D3557",
+                                                            });
+                                                        }}
                                                     >
                                                         <img
                                                             src={row[col.key]}

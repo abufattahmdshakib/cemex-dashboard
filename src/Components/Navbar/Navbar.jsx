@@ -56,23 +56,22 @@ const Navbar = () => {
       ${aiHidden ? "translate-x-52" : "translate-x-0"}`}
           >
             {/* Search */}
-            <div className="relative overflow-visible">
+            <div className="relative overflow-visible cursor-pointer">
               <div
-                data-flash
                 className={`flex items-center bg-[#F0F2F5] rounded-md transition-all duration-500 overflow-hidden
           ${showSearch ? "w-60 px-2" : "w-[48px]"}`}
               >
                 <button
                   onClick={() => setShowSearch((prev) => !prev)}
-                  className={`text-[22px] font-[800] text-[#121417] transition-all duration-500
+                  className={`text-[22px] cursor-pointer font-[800] text-[#121417] transition-all duration-500
             ${showSearch ? "ml-2 mr-2" : "mx-auto"}`}
                 >
-                  <img className="w-[24px]" src={search} alt="" />
+                  <img className="w-[24px] cursor-pointer" src={search} alt="" />
                 </button>
                 <input
                   type="text"
                   placeholder="Search here"
-                  className={`montserrat-fontsfamily bg-[#F0F2F5] text-[#121417] py-3 outline-none transition-all duration-500
+                  className={`montserrat-fontsfamily cursor-pointer bg-[#F0F2F5] text-[#121417] py-3 outline-none transition-all duration-500
             ${showSearch ? "flex-1 text-left pr-2 w-[24px]" : "w-0 opacity-0"}`}
                   autoFocus={showSearch}
                 />
@@ -91,7 +90,6 @@ const Navbar = () => {
 
             {/* AI Assistant */}
             <div
-              data-flash
               onClick={() => navigate("/AiAssistant")}
               className={`montserrat-fontsfamily flex items-center gap-2 bg-gradient-to-r from-[#6A0DAD] to-[#FF5C93] 
         px-4 py-[6px] rounded-md text-[22px] font-medium text-[#FFFFFF] transform 
@@ -106,9 +104,8 @@ const Navbar = () => {
           {/* User with Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
-              data-flash
               onClick={() => setDropdownOpen((prev) => !prev)}
-              className="montserrat-fontsfamily text-[24px] font-[700] bg-[#F0F2F5] py-[5px] px-4 rounded-md text-[#1D3557]"
+              className="montserrat-fontsfamily cursor-pointer text-[24px] font-[700] bg-[#F0F2F5] py-[5px] px-4 rounded-md text-[#1D3557]"
             >
               R
             </button>

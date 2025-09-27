@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { FaSearch, FaChevronLeft, FaChevronRight, FaChevronDown } from "react-icons/fa";
 import ManageRowDropdown from "./ManageRowDropdown";
 import { tableColumns, orderData, orderStatuses } from "./OrderTableData";
+import Swal from "sweetalert2";
 
 const OrderList = () => {
     const [resultsDropdownOpen, setResultsDropdownOpen] = useState(false);
@@ -149,13 +150,43 @@ const OrderList = () => {
                                         checkboxes[index] && (
                                             <td
                                                 key={col.key}
-                                                className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "id" ? "text-[#121417]" : "text-[#757575] cursor-pointer"}`}
+                                                className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "id" ? "text-[#121417]" : "text-[#757575]"}`}
                                             >
                                                 {col.key === "amount" ? (
                                                     `৳${row[col.key].toLocaleString()}`
                                                 ) : col.key === "report" ? (
-                                                    <div className="bg-[#F0F2F5] rounded-[8px] p-2 flex items-center justify-center w-8 h-8">
-                                                        <img src={row[col.key]} alt="report" className="w-6 h-6 object-contain" />
+                                                    <div
+                                                        className="bg-[#F0F2F5] rounded-[8px] p-2 flex items-center justify-center w-8 h-8 cursor-pointer"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            Swal.fire({
+                                                                title: "Note Details",
+                                                                text: row.note || "No note available", // এখানে text দেখাবে
+                                                                icon: "info",
+                                                                confirmButtonColor: "#1D3557",
+                                                            });
+                                                        }}
+                                                    >
+                                                        <img
+                                                            src={row[col.key]}
+                                                            alt="report"
+                                                            className="w-6 h-6 object-contain"
+                                                        />
+                                                    </div>
+                                                ) : col.key === "note" ? (
+                                                    <div
+                                                        className="flex items-center justify-center cursor-pointer"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            Swal.fire({
+                                                                title: "Note Details",
+                                                                text: row[col.key] || "No note available", // এখানে text দেখাবে
+                                                                icon: "info",
+                                                                confirmButtonColor: "#1D3557",
+                                                            });
+                                                        }}
+                                                    >
+                                                        <span className="text-[#121417]">{row[col.key]}</span> {/* Plain text */}
                                                     </div>
                                                 ) : (
                                                     <span>{row[col.key]}</span>

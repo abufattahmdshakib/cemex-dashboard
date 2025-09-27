@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaSearch, FaChevronLeft, FaChevronRight, FaChevronDown } from "react-icons/fa";
 import edit from '../../../src/assets/edit-2.svg';
+import Swal from "sweetalert2";
 
 // ---------------- DATA ----------------
 export const orderStatuses = [
@@ -222,8 +223,28 @@ const CustomerList = () => {
                         {currentData.map(row => (
                             <tr key={row.orderId} className="hover:bg-gray-50">
                                 {tableColumns.map((col, index) => checkboxes[index] && (
-                                    <td key={col.key} className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "orderId" ? "text-[#121417]" : "text-[#757575]"}`}>
-                                        {col.key === "update" ? <img src={row[col.key]} alt="edit" className="w-5 h-5 cursor-pointer" /> : row[col.key]}
+                                    <td
+                                        key={col.key}
+                                        className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "orderId" ? "text-[#121417]" : "text-[#757575]"}`}
+                                    >
+                                        {col.key === "update" ? (
+                                            <div
+                                                className="flex items-center justify-center cursor-pointer"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    Swal.fire({
+                                                        title: "Update Details",
+                                                        text: "No update available",
+                                                        icon: "info",
+                                                        confirmButtonColor: "#1D3557",
+                                                    });
+                                                }}
+                                            >
+                                                <img src={row[col.key]} alt="edit" className="w-5 h-5" />
+                                            </div>
+                                        ) : (
+                                            row[col.key]
+                                        )}
                                     </td>
                                 ))}
                             </tr>

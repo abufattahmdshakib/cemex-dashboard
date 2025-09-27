@@ -6,6 +6,55 @@ const cities = [
   "All", "Dhaka", "Sylhet", "Chattogram", "Barisal", "Mymensingh", "Rajshahi", "Rangpur", "Khulna"
 ];
 
+// প্রতিটি সিটির ডেটা আলাদাভাবে সংজ্ঞায়িত
+const dataByCity = {
+  All: [
+    { name: 'Cemex Builder A1', value: 20000000, color: '#E8DEEE' },
+    { name: 'Cemex Classic C1', value: 8000000, color: '#E8DEEE' },
+    { name: 'Cemex Supreme S1', value: 15000000, color: '#E8DEEE' },
+  ],
+  Dhaka: [
+    { name: 'Cemex Builder A1', value: 18000000, color: '#E8DEEE' },
+    { name: 'Cemex Classic C1', value: 7000000, color: '#E8DEEE' },
+    { name: 'Cemex Supreme S1', value: 14000000, color: '#E8DEEE' },
+  ],
+  Sylhet: [
+    { name: 'Cemex Builder A1', value: 15000000, color: '#E8DEEE' },
+    { name: 'Cemex Classic C1', value: 5000000, color: '#E8DEEE' },
+    { name: 'Cemex Supreme S1', value: 13000000, color: '#E8DEEE' },
+  ],
+  Chattogram: [
+    { name: 'Cemex Builder A1', value: 17000000, color: '#E8DEEE' },
+    { name: 'Cemex Classic C1', value: 9000000, color: '#E8DEEE' },
+    { name: 'Cemex Supreme S1', value: 12000000, color: '#E8DEEE' },
+  ],
+  Barisal: [
+    { name: 'Cemex Builder A1', value: 16000000, color: '#E8DEEE' },
+    { name: 'Cemex Classic C1', value: 8000000, color: '#E8DEEE' },
+    { name: 'Cemex Supreme S1', value: 11000000, color: '#E8DEEE' },
+  ],
+  Mymensingh: [
+    { name: 'Cemex Builder A1', value: 14000000, color: '#E8DEEE' },
+    { name: 'Cemex Classic C1', value: 6000000, color: '#E8DEEE' },
+    { name: 'Cemex Supreme S1', value: 10000000, color: '#E8DEEE' },
+  ],
+  Rajshahi: [
+    { name: 'Cemex Builder A1', value: 13000000, color: '#E8DEEE' },
+    { name: 'Cemex Classic C1', value: 5000000, color: '#E8DEEE' },
+    { name: 'Cemex Supreme S1', value: 9000000, color: '#E8DEEE' },
+  ],
+  Rangpur: [
+    { name: 'Cemex Builder A1', value: 12000000, color: '#E8DEEE' },
+    { name: 'Cemex Classic C1', value: 4000000, color: '#E8DEEE' },
+    { name: 'Cemex Supreme S1', value: 8000000, color: '#E8DEEE' },
+  ],
+  Khulna: [
+    { name: 'Cemex Builder A1', value: 11000000, color: '#E8DEEE' },
+    { name: 'Cemex Classic C1', value: 3000000, color: '#E8DEEE' },
+    { name: 'Cemex Supreme S1', value: 7000000, color: '#E8DEEE' },
+  ],
+};
+
 const SellingProduct = () => {
   const [selectedCity, setSelectedCity] = useState("All");
   const [openCalendar, setOpenCalendar] = useState(false);
@@ -14,12 +63,7 @@ const SellingProduct = () => {
 
   const calendarRef = useRef(null);
 
-  const data = [
-    { name: 'Cemex Builder A1', value: 20000000, color: '#E8DEEE' },
-    { name: 'Cemex Classic C1', value: 8000000, color: '#E8DEEE' },
-    { name: 'Cemex Supreme S1', value: 15000000, color: '#E8DEEE' },
-  ];
-
+  const data = dataByCity[selectedCity] || dataByCity["All"];
   const maxValue = 20000000;
   const ticks = [10000, 50000, 500000, 1000000, 10000000, 20000000];
 
@@ -56,10 +100,10 @@ const SellingProduct = () => {
           Highest Selling Product
         </h1>
 
-        <div data-flash className="relative" ref={calendarRef}>
+        <div className="relative" ref={calendarRef}>
           <button
             onClick={() => setOpenCalendar(!openCalendar)}
-            className="montserrat-fontsfamily border-[1.5px] border-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center gap-2 text-[#121417] text-[14px] font-[500]"
+            className="montserrat-fontsfamily border-[1.5px] border-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center gap-2 text-[#121417] text-[14px] font-[500] cursor-pointer"
           >
             Nov 25, 2023 - Oct 31, 2024{" "}
             <span className="text-[#757575] text-[20px]">
@@ -82,12 +126,12 @@ const SellingProduct = () => {
       </div>
 
       {/* City Buttons */}
-      <div className="flex justify-around gap-2 py-7 border-y border-[#DBE0E5] mt-5">
+      <div className="flex justify-around gap-2 py-7 border-y border-[#DBE0E5] mt-5 ">
         {cities.map((city) => (
           <button
             key={city}
             onClick={() => setSelectedCity(city)}
-            className={`px-4 py-2 rounded text-[12px] font-[500] ${selectedCity === city
+            className={`px-4 py-2 rounded text-[12px] font-[500] cursor-pointer ${selectedCity === city
                 ? "bg-[#1D3557] text-white border-[#1D3557]"
                 : "bg-[#F0F2F5] text-[#121417] border-[#F0F2F5]"
               }`}

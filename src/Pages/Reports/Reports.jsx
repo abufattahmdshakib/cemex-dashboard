@@ -62,10 +62,10 @@ const Reports = () => {
                 <div  className='flex justify-between items-center mt-8'>
 
                     {/* Report Dropdown */}
-                    <div data-flash className="relative w-[450px]" ref={dropdownRef}>
+                    <div className="relative w-[450px]" ref={dropdownRef}>
                         <button
                             onClick={() => setOpenDropdown(!openDropdown)}
-                            className="montserrat-fontsfamily  border-[1.5px] border-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center justify-between gap-2 text-[#121417] text-[14px] font-[500] w-full"
+                            className="montserrat-fontsfamily cursor-pointer border-[1.5px] border-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center justify-between gap-2 text-[#121417] text-[14px] font-[500] w-full"
                         >
                             {selectedReport}
                             <FaChevronDown
@@ -101,10 +101,10 @@ const Reports = () => {
                     {/* Export & Calendar Button */}
                     <div className="flex items-center gap-4">
                         {/* Calendar Dropdown */}
-                        <div data-flash className="relative" ref={calendarRef}>
+                        <div className="relative" ref={calendarRef}>
                             <button
                                 onClick={() => setOpenCalendar(!openCalendar)}
-                                className="montserrat-fontsfamily border-[1.5px] border-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center gap-2 text-[#121417] text-[14px] font-[500]"
+                                className="cursor-pointer montserrat-fontsfamily border-[1.5px] border-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center gap-2 text-[#121417] text-[14px] font-[500]"
                             >
                                 Nov 25, 2023 - Oct 31, 2024{" "}
                                 <span className="text-[#757575] text-[20px]">
