@@ -32,7 +32,7 @@ const AdminPanel = () => {
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-[22px] text-[#1D3557] font-[700]">Admin Panel</h1>
                 {/* New Order */}
-                <p className="montserrat-fontsfamily text-white font-semibold text-[14px] rounded-[8px] bg-[#1D3557] w-38 flex items-center justify-center gap-2 py-2 px-4 cursor-pointer">
+                <p className="montserrat-fontsfamily text-white font-semibold text-[14px] rounded-[8px] bg-[#1D3557] w-38 flex items-center justify-center gap-2 py-2 px-4">
                     <FaPlus className="w-3 h-3" /> Add Admin
                 </p>
             </div>

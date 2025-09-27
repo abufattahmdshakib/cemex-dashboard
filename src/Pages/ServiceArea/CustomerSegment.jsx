@@ -61,7 +61,7 @@ const CustomerSegment = () => {
         <div className="montserrat-fontsfamily border p-5 border-[#DBE0E5] shadow-md  rounded-[12px]">
             {/* Header */}
             <h1 className="text-[16px] text-[#121417] text-left font-[700] mt-5">
-                Orders by Customer Segment with Revenue
+                Orders by Customer Segment
             </h1>
 
             {/* Chart */}

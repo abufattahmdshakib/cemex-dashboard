@@ -1,90 +1,127 @@
 import React, { useState } from "react";
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-} from "recharts";
 
-// List of cities
+
 const cities = [
-  "All",
-  "Dhaka",
-  "Sylhet",
-  "Chattogram",
-  "Barisal",
-  "Mymensingh",
-  "Rajshahi",
-  "Rangpur",
-  "Khulna",
+  "All", "Dhaka", "Sylhet", "Chattogram", "Barisal", "Mymensingh", "Rajshahi", "Rangpur", "Khulna"
 ];
 
-// Chart data
-const orderFrequencyData = [
-  { range: "Small Customers", value: 10000 },
-  { range: "Big Retailers", value: 50000 },
-  { range: "Logistics", value: 500000 },
-  { range: "Medium Retailers", value: 1000000 },
-  { range: "Other", value: 10000000 },
-  { value: 20000000 },
-];
 
-// Custom YAxis Tick
-const CustomTick = ({ x, y, payload }) => (
-  <text
-    x={x -130}
-    y={y}
-    textAnchor="start"
-    fill="#121417"
-    fontSize={12}
-    fontFamily="Montserrat"
-  >
-    {payload.value}
-  </text>
-);
-
-// Custom XAxis Tick – horizontal (no rotation)
-const CustomXTick = ({ x, y, payload }) => {
-  const formatCurrency = (num) =>
-    "৳" + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-  return (
-    <text
-      x={x -15}
-      y={y}
-      textAnchor="end"
-      fill="#757575"
-      fontSize={12}
-      fontWeight={600}
-      fontFamily="Montserrat"
-    >
-      {formatCurrency(payload.value)}
-    </text>
-  );
+const dataByCity = {
+  All: [
+    { name: 'Small Customers', value: 19800000, color: '#E8DEEE' },
+    { name: 'Big Retailers', value: 8200000, color: '#E8DEEE' },
+    { name: 'Logistics', value: 1530000, color: '#E8DEEE' },
+    { name: 'Medium Retailers', value: 14800000, color: '#E8DEEE' },
+    { name: 'Other', value: 14500000, color: '#E8DEEE' },
+  ],
+  Dhaka: [
+    { name: 'Small Customers', value: 18800000, color: '#E8DEEE' },
+    { name: 'Big Retailers', value: 8500000, color: '#E8DEEE' },
+    { name: 'Logistics', value: 1400000, color: '#E8DEEE' },
+    { name: 'Medium Retailers', value: 15000000, color: '#E8DEEE' },
+    { name: 'Other', value: 12500000, color: '#E8DEEE' },
+  ],
+  Sylhet: [
+    { name: 'Small Customers', value: 15200000, color: '#E8DEEE' },
+    { name: 'Big Retailers', value: 5400000, color: '#E8DEEE' },
+    { name: 'Logistics', value: 13500000, color: '#E8DEEE' },
+    { name: 'Medium Retailers', value: 1200000, color: '#E8DEEE' },
+    { name: 'Other', value: 11700000, color: '#E8DEEE' },
+  ],
+  Chattogram: [
+    { name: 'Small Customers', value: 17200000, color: '#E8DEEE' },
+    { name: 'Big Retailers', value: 8800000, color: '#E8DEEE' },
+    { name: 'Logistics', value: 11800000, color: '#E8DEEE' },
+    { name: 'Medium Retailers', value: 12500000, color: '#E8DEEE' },
+    { name: 'Other', value: 1080000, color: '#E8DEEE' },
+  ],
+  Barisal: [
+    { name: 'Small Customers', value: 16500000, color: '#E8DEEE' },
+    { name: 'Big Retailers', value: 8000000, color: '#E8DEEE' },
+    { name: 'Logistics', value: 1130000, color: '#E8DEEE' },
+    { name: 'Medium Retailers', value: 10100000, color: '#E8DEEE' },
+    { name: 'Other', value: 9500000, color: '#E8DEEE' },
+  ],
+  Mymensingh: [
+    { name: 'Small Customers', value: 1440000, color: '#E8DEEE' },
+    { name: 'Big Retailers', value: 6300000, color: '#E8DEEE' },
+    { name: 'Logistics', value: 10500000, color: '#E8DEEE' },
+    { name: 'Medium Retailers', value: 9400000, color: '#E8DEEE' },
+    { name: 'Other', value: 8800000, color: '#E8DEEE' },
+  ],
+  Rajshahi: [
+    { name: 'Small Customers', value: 13500000, color: '#E8DEEE' },
+    { name: 'Big Retailers', value: 4900000, color: '#E8DEEE' },
+    { name: 'Logistics', value: 9500000, color: '#E8DEEE' },
+    { name: 'Medium Retailers', value: 8400000, color: '#E8DEEE' },
+    { name: 'Other', value: 7700000, color: '#E8DEEE' },
+  ],
+  Rangpur: [
+    { name: 'Small Customers', value: 12200000, color: '#E8DEEE' },
+    { name: 'Big Retailers', value: 4500000, color: '#E8DEEE' },
+    { name: 'Logistics', value: 11000000, color: '#E8DEEE' },
+    { name: 'Medium Retailers', value: 7400000, color: '#E8DEEE' },
+    { name: 'Other', value: 6800000, color: '#E8DEEE' },
+  ],
+  Khulna: [
+    { name: 'Small Customers', value: 11000000, color: '#E8DEEE' },
+    { name: 'Big Retailers', value: 3400000, color: '#E8DEEE' },
+    { name: 'Logistics', value: 7200000, color: '#E8DEEE' },
+    { name: 'Medium Retailers', value: 6300000, color: '#E8DEEE' },
+    { name: 'Other', value: 5600000, color: '#E8DEEE' },
+  ],
 };
 
 const ProfitMargin = () => {
   const [selectedCity, setSelectedCity] = useState("All");
+  const [hovered, setHovered] = useState(null);
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 
-  // Define manual ticks (no auto)
-  const xTicks = [10000, 50000, 500000, 1000000, 10000000, 20000000];
+  const data = dataByCity[selectedCity] || dataByCity["All"];
+  const maxValue = 20000000;
+  const ticks = [10000, 50000, 500000, 1000000, 10000000, 20000000];
+
+  const formatValue = (value) => {
+    if (value >= 1000000) return `৳${(value / 1000000).toFixed(0)},000,000`;
+    if (value >= 1000) return `৳${(value / 1000).toFixed(0)},000`;
+    return `৳${value}`;
+  };
+
+  const CustomTooltip = ({ name, value }) => (
+    <div
+      style={{
+        backgroundColor: "white",
+        border: "none",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+        padding: "8px 12px",
+        fontWeight: 600,
+        color: "#6A0DAD",
+        fontSize: "16px",
+        whiteSpace: "nowrap"
+      }}
+    >
+      <div style={{ color: "#333", fontWeight: 500 }}>{name}</div>
+      <div style={{ color: "#6A0DAD", fontWeight: 600 }}>
+        value:{value}
+      </div>
+    </div>
+  );
 
   return (
-    <div className="montserrat-fontsfamily border p-5 border-[#DBE0E5] shadow-md  rounded-[12px]">
-      {/* Header */}
-      <h1 className="text-[22px] text-[#1D3557] text-left font-[700] mt-5">
-        Orders by Customer Segment with Revenue
-      </h1>
+    <div className="montserrat-fontsfamily border p-5 border-[#DBE0E5] shadow-sm rounded-[12px]">
+      <div className="flex justify-between items-center">
+        <h1 className="text-[16px] text-[#121417] text-left font-[700]">
+          Orders by Customer Segment with Revenue
+        </h1>
+      </div>
 
-      {/* City buttons */}
-      <div className="flex justify-start gap-5 py-7 border-y border-[#DBE0E5] mt-5">
+      {/* City Buttons */}
+      <div className="flex justify-around gap-2 py-7 border-y border-[#DBE0E5] mt-5 ">
         {cities.map((city) => (
           <button
             key={city}
             onClick={() => setSelectedCity(city)}
-            className={`px-4 py-2 rounded text-[12px] font-[500] ${selectedCity === city
+            className={`px-4 py-2 rounded text-[12px] font-[500] cursor-pointer ${selectedCity === city
               ? "bg-[#1D3557] text-white border-[#1D3557]"
               : "bg-[#F0F2F5] text-[#121417] border-[#F0F2F5]"
               }`}
@@ -95,74 +132,72 @@ const ProfitMargin = () => {
       </div>
 
       {/* Chart */}
-      <div className="w-full mx-auto bg-white">
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart
-            data={orderFrequencyData}
-            layout="vertical"
-            margin={{ top: 20}}
-          >
-            {/* YAxis */}
-            <YAxis
-              dataKey="range"
-              type="category"
-              tick={<CustomTick />}
-              axisLine={false}
-              tickLine={false}
-              width={150}
-            />
+      <div className="w-full mt-8 bg-white">
+        <div className="space-y-2">
+          {data.map((item, index) => {
+            const barWidthPercent = (item.value / maxValue) * 100;
+            return (
+              <div key={index} className="flex items-center space-x-4 relative">
+                {/* Left label */}
+                <div className="w-40 text-[12px] text-[#757575] font-[500] pl-6">
+                  {item.name}
+                </div>
 
-            {/* XAxis – FULL manual control */}
-            <XAxis
-              type="category"
-              ticks={xTicks}
-              tick={<CustomXTick />}
-              axisLine={false}
-              tickLine={false}
-              interval={0}
-              allowDecimals={false}
-              tickMargin={20}
-            />
+                {/* Right bar */}
+                <div className="flex-1 relative">
+                  <div className="w-full h-9"></div>
 
-            {/* Tooltip */}
-            <Tooltip
-              cursor={{ fill: "transparent" }}
-              contentStyle={{
-                backgroundColor: "white",
-                border: "1px solid #DBE0E5",
-                borderRadius: "2px",
-              }}
-              labelStyle={{ color: "#121417", fontWeight: 600 }}
-              itemStyle={{ color: "#6A0DAD", fontWeight: 500 }}
-              formatter={(value) => [`৳${value.toLocaleString()}`, "value"]}
-            />
+                  {/* Filled bar */}
+                  <div
+                    className="absolute top-0 left-0 h-8 transition-all duration-500 ease-out cursor-pointer"
+                    style={{
+                      width: `${barWidthPercent}%`,
+                      backgroundColor: item.color
+                    }}
+                    onMouseEnter={(e) => {
+                      setHovered(index);
+                      setTooltipPos({ x: e.clientX, y: e.clientY });
+                    }}
+                    onMouseMove={(e) => {
+                      setTooltipPos({ x: e.clientX, y: e.clientY });
+                    }}
+                    onMouseLeave={() => setHovered(null)}
+                  >
+                    {hovered === index && (
+                      <div
+                        style={{
+                          position: "fixed",
+                          top: tooltipPos.y - 30 + "px",
+                          left: tooltipPos.x + 20 + "px",
+                          zIndex: 1000
+                        }}
+                      >
+                        <CustomTooltip name={item.name} value={item.value} />
+                      </div>
+                    )}
+                  </div>
 
-            {/* Custom Bar */}
-            <Bar
-              dataKey="value"
-              fill="#E8DEEE"
-              barSize={30}
-              minPointSize={5}
-              shape={(props) => {
-                const { fill, x, y, width, height } = props;
-                if (height <= 0) return null;
-                return (
-                  <g>
-                    <rect x={x} y={y} width={width} height={height} fill={fill} />
-                    <line
-                      x1={x + width}
-                      y1={y}
-                      x2={x + width}
-                      y2={y + height}
-                      stroke="#6A0DAD"
-                      strokeWidth={2}
-                    />
-                  </g>
-                );
-              }}
-            />
-          </BarChart>
-        </ResponsiveContainer>
+                  {/* End marker */}
+                  <div
+                    className="absolute top-0 w-[2px] h-8 bg-[#6A0DAD]"
+                    style={{ left: `${barWidthPercent}%` }}
+                  ></div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* X-axis labels */}
+        <div className="relative mt-6 h-6">
+          <div className="absolute inset-0 flex justify-between left-44 text-[12px] text-[#757575] font-[600]">
+            {ticks.map((tick, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <div className="text-center">{formatValue(tick)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

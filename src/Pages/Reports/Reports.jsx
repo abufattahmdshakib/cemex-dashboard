@@ -126,7 +126,7 @@ const Reports = () => {
                         </div>
 
                         {/* Export CSV */}
-                        <p className="montserrat-fontsfamily text-white font-semibold text-[14px] rounded-[8px] bg-[#1D3557] w-38 flex items-center justify-center gap-2 py-2 px-4 cursor-pointer">
+                        <p className="montserrat-fontsfamily text-white font-semibold text-[14px] rounded-[8px] bg-[#1D3557] w-38 flex items-center justify-center gap-2 py-2 px-4">
                             Export CSV{" "}
                             <span>
                                 <img src={documenticon} alt="download" />
