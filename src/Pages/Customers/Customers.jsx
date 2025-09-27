@@ -42,7 +42,7 @@ const Customers = () => {
                     </p>
 
                     {/* Calendar Dropdown */}
-                    <div data-flash className="relative" ref={calendarRef}>
+                    <div className="relative" ref={calendarRef}>
                         <button
                             onClick={() => setOpenCalendar(!openCalendar)}
                             className="montserrat-fontsfamily border-[1.5px] border-[#DBE0E5] px-4 py-2 rounded-[8px] flex items-center gap-2 text-[#121417] text-[14px] font-[500]"

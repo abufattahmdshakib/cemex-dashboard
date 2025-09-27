@@ -3,35 +3,25 @@ import { FaChevronDown } from "react-icons/fa";
 
 // Table data
 const divisionalData = [
-    { area: "Dhaka", orders: 15215, profit: 16709000, margin: 30, delivery: "1.4 days", growth: "+87.6%" },
-    { area: "Sylhet", orders: 15215, profit: 6345000, margin: 33, delivery: "1.2 days", growth: "+62%" },
-    { area: "Chattogram", orders: 15215, profit: 9597320, margin: 25, delivery: "1.0 days", growth: "+59.9%" },
-    { area: "Barisal", orders: 15215, profit: 7545000, margin: 23, delivery: "1.8 days", growth: "+50%" },
-    { area: "Mymensingh", orders: 15215, profit: 6000597, margin: 18, delivery: "1.2 days", growth: "+47%" },
-    { area: "Rajshahi", orders: 15215, profit: 4500000, margin: 16, delivery: "1.0 days", growth: "+12.4%" },
-    { area: "Rangpur", orders: 15215, profit: 1550000, margin: 3, delivery: "1.6 days", growth: "-17.9%" },
-    { area: "Khulna", orders: 15215, profit: 950000, margin: 2.7, delivery: "1.0 days", growth: "-26.3%" },
+    { area: "Dhaka", orders: 15215, profit: 16709000, margin: 30, delivery: "1.4 days", processing: "35 mins", avg: "92%", growth: "+87.6%" },
+    { area: "Sylhet", orders: 15215, profit: 6345000, margin: 33, delivery: "1.2 days", processing: "28 mins", avg: "88%", growth: "+62%" },
+    { area: "Chattogram", orders: 15215, profit: 9597320, margin: 25, delivery: "1.0 days", processing: "40 mins", avg: "85%", growth: "+59.9%" },
+    { area: "Barisal", orders: 15215, profit: 7545000, margin: 23, delivery: "1.8 days", processing: "50 mins", avg: "80%", growth: "+50%" },
+    { area: "Mymensingh", orders: 15215, profit: 6000597, margin: 18, delivery: "1.2 days", processing: "45 mins", avg: "77%", growth: "+47%" },
+    { area: "Rajshahi", orders: 15215, profit: 4500000, margin: 16, delivery: "1.0 days", processing: "30 mins", avg: "74%", growth: "+12.4%" },
+    { area: "Rangpur", orders: 15215, profit: 1550000, margin: 3, delivery: "1.6 days", processing: "55 mins", avg: "65%", growth: "-17.9%" },
+    { area: "Khulna", orders: 15215, profit: 950000, margin: 2.7, delivery: "1.0 days", processing: "60 mins", avg: "61%", growth: "-26.3%" },
 ];
 
-// Columns to display in the **table**
-const tableColumns = [
-    { label: "Area Coverage", key: "area" },
-    { label: "Orders", key: "orders" },
-    { label: "Profit", key: "profit" },
-    { label: "Profit Margin", key: "margin" },
-    { label: "Delivery Time", key: "delivery" },
-    { label: "Avg. Growth", key: "growth" },
-];
-
-// Columns to display in the **dropdown** (all 8)
+// Columns to display in dropdown (all 8)
 const dropdownColumns = [
     { label: "Area Coverage", key: "area" },
     { label: "Orders", key: "orders" },
     { label: "Profit", key: "profit" },
     { label: "Profit Margin", key: "margin" },
     { label: "Delivery Time", key: "delivery" },
-    { label: "Processing Time", key: "Processing" },
-    { label: "Avg. Satisfaction", key: "Avg" },
+    { label: "Processing Time", key: "processing" },
+    { label: "Avg. Satisfaction", key: "avg" },
     { label: "Avg. Growth", key: "growth" },
 ];
 
@@ -51,22 +41,26 @@ const DivisionalSales = () => {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    // ✅ Visible Columns = checked ones only
+    const visibleColumns = dropdownColumns.filter((_, idx) => checkboxes[idx]);
+
     return (
         <div className="montserrat-fontsfamily">
             {/* Header */}
             <div className="flex justify-between items-center mt-12 mb-8">
-                <h1 className="text-[22px] text-[#1D3557] font-[700]">Divisional Sales and Growth Potential</h1>
+                <h1 className="text-[22px] text-[#1D3557] font-[700]">
+                    Divisional Sales and Growth Potential
+                </h1>
 
                 {/* Manage Row Button */}
                 <div className="relative" ref={dropdownRef}>
                     <button
-                        data-flash
                         onClick={() => setDropdownOpen(!dropdownOpen)}
-                        className="flex items-center shadow-md  gap-2 border-1 border-[#DBE0E5] bg-[#FFFFFF] text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
+                        className="flex items-center shadow-md gap-2 border-1 border-[#DBE0E5] bg-[#FFFFFF] text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
                     >
                         Manage Row ({checkboxes.filter(c => c).length})
                         <FaChevronDown
-                            className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`}
+                            className={`transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""}`}
                         />
                     </button>
 
@@ -102,7 +96,7 @@ const DivisionalSales = () => {
                 <table className="w-full border-collapse">
                     <thead>
                         <tr className="bg-white text-left">
-                            {tableColumns.map((col) => (
+                            {visibleColumns.map((col) => (
                                 <th
                                     key={col.key}
                                     className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[14px] font-[600]"
@@ -115,31 +109,31 @@ const DivisionalSales = () => {
                     <tbody>
                         {divisionalData.map((row) => (
                             <tr key={row.area} className="hover:bg-gray-50">
-                                {tableColumns.map((col) => (
+                                {visibleColumns.map((col) => (
                                     <td
                                         key={col.key}
                                         className={`px-4 py-3 border-b border-[#E5E8EB] text-[14px] font-[500] ${col.key === "area"
-                                                ? "text-[#121417] underline"
-                                                : "text-[#757575]"
+                                            ? "text-[#121417] underline"
+                                            : "text-[#757575]"
                                             }`}
                                     >
                                         {col.key === "profit"
-                                            ? `৳${row[col.key].toLocaleString()}`
+                                            ? `৳${row[col.key]?.toLocaleString() || "-"}`
                                             : col.key === "margin"
-                                                ? `${row[col.key]}%`
+                                                ? `${row[col.key] || "-"}%`
                                                 : col.key === "growth"
-                                                    ? row[col.key].startsWith("+")
-                                                        ? (
+                                                    ? row[col.key]
+                                                        ? row[col.key].startsWith("+") ? (
                                                             <p className="montserrat-fontsfamily bg-[#EAFAF1] rounded-full text-[#2ECC71] text-[16px] py-1 px-3 text-center inline-block">
                                                                 {row[col.key]}
                                                             </p>
-                                                        )
-                                                        : (
+                                                        ) : (
                                                             <p className="bg-[#FDEDEB] rounded-full text-[#E74C3C] text-[16px] py-1 px-3 text-center inline-block">
                                                                 {row[col.key]}
                                                             </p>
                                                         )
-                                                    : row[col.key]}
+                                                        : "-"
+                                                    : row[col.key] || "-"}
                                     </td>
                                 ))}
                             </tr>

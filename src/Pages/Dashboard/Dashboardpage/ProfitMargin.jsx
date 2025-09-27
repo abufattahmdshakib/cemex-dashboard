@@ -3,18 +3,17 @@ import React, { useState, useRef, useEffect } from "react";
 import { FaChevronDown } from "react-icons/fa";
 
 const profitData = [
-  { segment: "Small Customers", revenue: 5000000, costs: 3050000, profit: 1950000, margin: 30, growth: "5%" },
-  { segment: "Big Retailers", revenue: 15000000, costs: 10000000, profit: 5000000, margin: 33, growth: "7%" },
-  { segment: "Logistics-Supported", revenue: 8000000, costs: 6000000, profit: 2000000, margin: 25, growth: "4%" },
-  { segment: "Medium Retailers", revenue: 7000000, costs: 4500000, profit: 2500000, margin: 36, growth: "6%" },
-  { segment: "Others", revenue: 3000000, costs: 2500000, profit: 500000, margin: 17, growth: "3%" },
+  { segment: "Small Customers", revenue: 5000000, costs: 3050000, profit: 1950000, margin: 30, growth: "5%", city: "Dhaka" },
+  { segment: "Big Retailers", revenue: 15000000, costs: 10000000, profit: 5000000, margin: 33, growth: "7%", city: "Chattogram" },
+  { segment: "Logistics-Supported", revenue: 8000000, costs: 6000000, profit: 2000000, margin: 25, growth: "4%", city: "Sylhet" },
+  { segment: "Medium Retailers", revenue: 7000000, costs: 4500000, profit: 2500000, margin: 36, growth: "6%", city: "Rajshahi" },
+  { segment: "Others", revenue: 3000000, costs: 2500000, profit: 500000, margin: 17, growth: "3%", city: "Khulna" },
 ];
 
 const cities = [
   "All", "Dhaka", "Sylhet", "Chattogram", "Barisal", "Mymensingh", "Rajshahi", "Rangpur", "Khulna",
 ];
 
-// All columns for dropdown (6 columns)
 const allColumns = [
   { label: "Customer Segment", key: "segment" },
   { label: "Revenue", key: "revenue" },
@@ -24,14 +23,11 @@ const allColumns = [
   { label: "Avg. Growth", key: "growth" },
 ];
 
-// Columns to display in table (unchanged)
-const tableColumns = allColumns.filter(col => col.key !== "growth");
-
 const ProfitMargin = () => {
   const [selectedCity, setSelectedCity] = useState("All");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // First 5 true, last one false
+  // প্রথম 5 টা true, Growth default false
   const [checkboxes, setCheckboxes] = useState([true, true, true, true, true, false]);
 
   const dropdownRef = useRef(null);
@@ -42,7 +38,6 @@ const ProfitMargin = () => {
     setCheckboxes(newBoxes);
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -53,22 +48,30 @@ const ProfitMargin = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // ✅ Filter data based on city
+  const filteredData =
+    selectedCity === "All"
+      ? profitData
+      : profitData.filter((row) => row.city === selectedCity);
+
+  // ✅ Columns to show based on checkbox
+  const visibleColumns = allColumns.filter((_, index) => checkboxes[index]);
+
   return (
     <div className="montserrat-fontsfamily">
       {/* Header */}
       <div className="flex justify-between items-center mt-12 mb-6">
         <h1 className="text-[22px] text-[#1D3557] font-[700]">Profit Margin by Segment</h1>
 
-        {/* Manage Row Button with Dropdown */}
+        {/* Manage Row Button */}
         <div className="relative" ref={dropdownRef}>
           <button
-            data-flash
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="flex items-center shadow-md  gap-2 border-1 border-[#DBE0E5] bg-[#FFFFFF] text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
+            className="flex items-center shadow-md gap-2 border-1 border-[#DBE0E5] bg-[#FFFFFF] text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
           >
             Manage Row ({checkboxes.filter(c => c).length})
             <FaChevronDown
-              className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`}
+              className={`transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""}`}
             />
           </button>
           {dropdownOpen && (
@@ -100,10 +103,11 @@ const ProfitMargin = () => {
           <button
             key={city}
             onClick={() => setSelectedCity(city)}
-            className={`px-4 py-2 rounded text-[12px] font-[500] ${selectedCity === city
-              ? "bg-[#1D3557] text-white border-[#1D3557]"
-              : "bg-[#F0F2F5] text-[#121417] border-[#F0F2F5]"
-              }`}
+            className={`px-4 py-2 rounded text-[12px] font-[500] ${
+              selectedCity === city
+                ? "bg-[#1D3557] text-white border-[#1D3557]"
+                : "bg-[#F0F2F5] text-[#121417] border-[#F0F2F5]"
+            }`}
           >
             {city}
           </button>
@@ -115,7 +119,7 @@ const ProfitMargin = () => {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-white text-left">
-              {tableColumns.map((col) => (
+              {visibleColumns.map((col) => (
                 <th
                   key={col.key}
                   className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[14px] font-[600]"
@@ -126,25 +130,34 @@ const ProfitMargin = () => {
             </tr>
           </thead>
           <tbody>
-            {profitData.map((row) => (
+            {filteredData.map((row) => (
               <tr key={row.segment} className="hover:bg-gray-50">
-                {tableColumns.map((col) => (
+                {visibleColumns.map((col) => (
                   <td
                     key={col.key}
-                    className={`px-4 py-3 border-b border-[#E5E8EB] text-[14px] font-[500] ${col.key === "segment"
-                      ? "text-[#121417]"
-                      : "text-[#757575]"
-                      }`}
+                    className={`px-4 py-3 border-b border-[#E5E8EB] text-[14px] font-[500] ${
+                      col.key === "segment" ? "text-[#121417]" : "text-[#757575]"
+                    }`}
                   >
                     {col.key === "revenue" || col.key === "costs" || col.key === "profit"
                       ? `৳${row[col.key].toLocaleString()}`
                       : col.key === "margin"
-                        ? `${row[col.key]}%`
-                        : row[col.key]}
+                      ? `${row[col.key]}%`
+                      : row[col.key]}
                   </td>
                 ))}
               </tr>
             ))}
+            {filteredData.length === 0 && (
+              <tr>
+                <td
+                  colSpan={visibleColumns.length}
+                  className="text-center py-6 text-[#757575]"
+                >
+                  No data available for {selectedCity}
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

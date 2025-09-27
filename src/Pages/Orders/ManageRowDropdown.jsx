@@ -5,22 +5,19 @@ const allColumns = [
     { key: "id", label: "ID Number" },
     { key: "customer", label: "Customer" },
     { key: "division", label: "Division" },
-    { key: "contact", label: "Contact Number" },
-    { key: "address", label: "Address" },
-    { key: "frequency", label: "Order Frequency" },
-    { key: "lifetime", label: "Lifetime Value" },
-    { key: "avgValue", label: "Avg. Value" },
+    { key: "orderDate", label: "Order Date" },
+    { key: "orderTime", label: "Order Time" },
+    { key: "quantity", label: "Quantity" },
+    { key: "amount", label: "Amount" },
+    { key: "status", label: "Status" },
+    { key: "deliveryAddress", label: "Delivery Address" },
+    { key: "processingTime", label: "Processing Time" },
+    { key: "deliveryTime", label: "Delivery Time" },
     { key: "avgSatisfaction", label: "Avg. Satisfaction" },
-    { key: "productReturn", label: "Product Return" },
-    { key: "update", label: "Update" },
+    { key: "report", label: "Report" },
 ];
 
-const ManageRowDropdown = () => {
-    // First 5 true, rest false
-    const [checkboxes, setCheckboxes] = useState([
-        true, true, true, true, false, true, true, true, false, false, true
-    ]);
-
+const ManageRowDropdown = ({ checkboxes, setCheckboxes }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -30,47 +27,41 @@ const ManageRowDropdown = () => {
         setCheckboxes(newBoxes);
     };
 
-    // Indexes to flash
-    const flashIndexes = [5, 9, 10];
-    const [flashing, setFlashing] = useState(false);
-
-    // Trigger flash when dropdown opens
     useEffect(() => {
-        if (dropdownOpen) {
-            setFlashing(true);
-            const timer = setTimeout(() => setFlashing(false), 1000); // 1 second flash
-            return () => clearTimeout(timer);
-        }
-    }, [dropdownOpen]);
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     return (
         <div className="relative" ref={dropdownRef}>
             <button
-                data-flash
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center shadow-md  gap-2 border border-[#DBE0E5] bg-white text-[14px] text-[#121417] px-5 py-3 rounded-[8px]"
+                className="flex items-center gap-2 px-4 py-2 text-[14px] font-[500] bg-[#FFFFFF] border border-[#DBE0E5] rounded-[8px] shadow-md cursor-pointer"
             >
                 Manage Row ({checkboxes.filter(Boolean).length})
                 <FaChevronDown
-                    className={`transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""
-                        }`}
+                    className={`ml-1 transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""}`}
                 />
             </button>
 
             {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-72 bg-white border border-[#DBE0E5] rounded-[12px] p-4 shadow-lg z-10">
+                <div className="absolute right-0 mt-2 w-72 bg-white border border-[#DBE0E5] rounded-[8px] p-3 shadow-lg z-10">
                     {allColumns.map((col, index) => (
                         <label
                             key={col.key}
-                            className="flex items-center justify-between px-4 py-2 hover:bg-gray-100 cursor-pointer text-[#121417] text-[14px] font-[600]"
+                            className="flex items-center justify-between px-4 py-2 hover:bg-gray-100 cursor-pointer text-[#121417] text-[14px] font-[500]"
                         >
-                            <span className="flex items-center gap-2">
+                            <span className="flex items-center gap-2 cursor-pointer">
                                 <input
                                     type="checkbox"
                                     checked={checkboxes[index]}
                                     onChange={() => toggleCheckbox(index)}
-                                    className={`checkbox-pulse ${flashing && flashIndexes.includes(index) ? "animate-flash" : ""
-                                        }`}
+                                    className="checkbox-pulse cursor-pointer"
                                 />
                                 {col.label}
                             </span>
@@ -78,20 +69,6 @@ const ManageRowDropdown = () => {
                     ))}
                 </div>
             )}
-
-            {/* Flash animation */}
-            <style>
-                {`
-          @keyframes flash {
-            0%, 100% { background-color: #dbe0e5; }
-            50% { background-color: #f0f8ff; }
-          }
-          .animate-flash {
-            animation: flash 1s ease-in-out 1;
-            border-radius: 4px;
-          }
-        `}
-            </style>
         </div>
     );
 };
