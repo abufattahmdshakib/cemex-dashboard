@@ -41,7 +41,7 @@ const ManageRowDropdown = ({ checkboxes, setCheckboxes }) => {
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center gap-2 px-4 py-2 text-[14px] font-[500] bg-[#FFFFFF] border border-[#DBE0E5] rounded-[8px] shadow-md cursor-pointer"
+                className="flex text-black items-center gap-2 px-4 py-2 text-[14px] font-[500] bg-[#FFFFFF] border border-[#DBE0E5] rounded-[8px] shadow-md cursor-pointer"
             >
                 Manage Row ({checkboxes.filter(Boolean).length})
                 <FaChevronDown

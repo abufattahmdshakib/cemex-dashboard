@@ -159,7 +159,7 @@ const CustomerList = () => {
                                     />
                                 </button>
                                 {divisionDropdownOpen && (
-                                    <ul className="absolute mt-2 w-40 bg-white border border-[#DBE0E5] rounded-[8px] shadow-lg z-10 cursor-pointer">
+                                    <ul className="absolute mt-2 w-40 bg-white border border-[#DBE0E5] rounded-[8px] shadow-lg z-10 cursor-pointer ">
                                         {divisions.map(d => (
                                             <li
                                                 key={d}
@@ -168,7 +168,7 @@ const CustomerList = () => {
                                                     setDivisionDropdownOpen(false);
                                                     setCurrentPage(1);
                                                 }}
-                                                className="px-4 py-2 cursor-pointer hover:bg-[#1D3557] hover:text-white"
+                                                className="px-4 py-2 cursor-pointer hover:bg-[#1D3557] hover:text-white text-[#121417]"
                                             >
                                                 {d}
                                             </li>

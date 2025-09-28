@@ -20,12 +20,17 @@ const OrderList = () => {
 
     const divisions = ["Dhaka", "Sylhet", "Chattogram", "Barisal", "Mymensingh", "Rajshahi", "Rangpur", "Khulna"];
 
+    // ✅ Fixed filtering logic
     const filteredData = orderData
         .filter(order => selectedStatus === "All" || order.status === selectedStatus)
-        .filter(order => selectedDivision ? order.division === selectedDivision : true)
-        .filter(order =>
-            String(order.id || "").toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        .filter(order => (selectedDivision ? order.division === selectedDivision : true))
+        .filter(order => {
+            if (!searchTerm) return true;
+            const idString = order.orderId.toLowerCase();
+            const searchString = searchTerm.toLowerCase().trim();
+            return idString.includes(searchString);
+        });
+
 
     const totalPages = Math.ceil(filteredData.length / resultsPerPage);
     const currentData = filteredData.slice(
@@ -76,7 +81,7 @@ const OrderList = () => {
                                 >
                                     {selectedDivision || "Select Division"}
                                     <FaChevronDown
-                                        className={`ml-1 transition-transform duration-300 ${divisionDropdownOpen ? "rotate-180" : ""}`}
+                                        className={`ml-1 transition-transform duration-300  ${divisionDropdownOpen ? "rotate-180" : ""}`}
                                     />
                                 </button>
                                 {divisionDropdownOpen && (
@@ -145,12 +150,13 @@ const OrderList = () => {
                         </thead>
                         <tbody>
                             {currentData.map((row) => (
-                                <tr key={row.id} className="hover:bg-gray-50">
+                                <tr key={row.orderId} className="hover:bg-gray-50">
                                     {tableColumns.map((col, index) =>
                                         checkboxes[index] && (
                                             <td
                                                 key={col.key}
-                                                className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "id" ? "text-[#121417]" : "text-[#757575]"}`}
+                                                className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "orderId" ? "text-[#121417]" : "text-[#757575]"
+                                                    }`}
                                             >
                                                 {col.key === "amount" ? (
                                                     `৳${row[col.key].toLocaleString()}`
@@ -161,7 +167,7 @@ const OrderList = () => {
                                                             e.stopPropagation();
                                                             Swal.fire({
                                                                 title: "Note Details",
-                                                                text: row.note || "No note available", // এখানে text দেখাবে
+                                                                text: row.note || "No note available",
                                                                 icon: "info",
                                                                 confirmButtonColor: "#1D3557",
                                                             });
@@ -180,13 +186,13 @@ const OrderList = () => {
                                                             e.stopPropagation();
                                                             Swal.fire({
                                                                 title: "Note Details",
-                                                                text: row[col.key] || "No note available", // এখানে text দেখাবে
+                                                                text: row[col.key] || "No note available",
                                                                 icon: "info",
                                                                 confirmButtonColor: "#1D3557",
                                                             });
                                                         }}
                                                     >
-                                                        <span className="text-[#121417]">{row[col.key]}</span> {/* Plain text */}
+                                                        <span className="text-[#121417]">{row[col.key]}</span>
                                                     </div>
                                                 ) : (
                                                     <span>{row[col.key]}</span>
