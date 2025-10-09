@@ -116,7 +116,7 @@ const ProfitMargin = () => {
       </div>
 
       {/* City Buttons */}
-      <div className="flex justify-around gap-2 py-7 border-y border-[#DBE0E5] mt-5 ">
+      <div className="flex justify-start gap-2 py-7 border-y border-[#DBE0E5] mt-5 ">
         {cities.map((city) => (
           <button
             key={city}

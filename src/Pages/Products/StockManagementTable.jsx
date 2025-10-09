@@ -72,6 +72,8 @@ const StockManagementTable = () => {
     setPopupVisible(false);
     setSelectedRow(null);
   };
+  // ✅ add this line
+  const visibleColumns = tableColumns.filter((col) => columnVisibility[col.key]);
 
   return (
     <div>
@@ -83,53 +85,61 @@ const StockManagementTable = () => {
         />
       </div>
 
-      <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="bg-white text-left">
-              {tableColumns.map(
-                (col) =>
-                  columnVisibility[col.key] && (
-                    <th
-                      key={col.key}
-                      className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[12px] font-[600]"
-                    >
-                      {col.label}
-                    </th>
-                  )
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {currentData.map((row, idx) => (
-              <tr key={idx} className="hover:bg-gray-50">
+      {/* table */}
+      {visibleColumns.length === 0 ? (
+        <div className="text-center py-10 text-[#757575] text-[15px] font-medium border border-[#E5E8EB] rounded-[12px] bg-white mb-8">
+          ⚠ No columns selected. Please enable at least one column from
+          <span className="font-semibold text-[#1D3557]"> Manage Row</span>.
+        </div>
+      ) : (
+        <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-white text-left">
                 {tableColumns.map(
                   (col) =>
                     columnVisibility[col.key] && (
-                      <td
+                      <th
                         key={col.key}
-                        className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "name" ? "text-[#121417]" : "text-[#757575]"
-                          }`}
-                        onClick={() => col.key === "order" && openPopup(row)}
-                        style={{ cursor: col.key === "order" ? "pointer" : "default" }}
+                        className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[12px] font-[600]"
                       >
-                        {col.key === "buyingPrice" || col.key === "total"
-                          ? `৳${row[col.key].toLocaleString()}`
-                          : col.key === "order" ? (
-                            <div className="bg-[#1D3557] text-white rounded-[8px] p-1 text-center cursor-pointer">
-                              {row[col.key]}
-                            </div>
-                          ) : (
-                            row[col.key].toLocaleString()
-                          )}
-                      </td>
+                        {col.label}
+                      </th>
                     )
                 )}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {currentData.map((row, idx) => (
+                <tr key={idx} className="hover:bg-gray-50">
+                  {tableColumns.map(
+                    (col) =>
+                      columnVisibility[col.key] && (
+                        <td
+                          key={col.key}
+                          className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "name" ? "text-[#121417]" : "text-[#757575]"
+                            }`}
+                          onClick={() => col.key === "order" && openPopup(row)}
+                          style={{ cursor: col.key === "order" ? "pointer" : "default" }}
+                        >
+                          {col.key === "buyingPrice" || col.key === "total"
+                            ? `৳${row[col.key].toLocaleString()}`
+                            : col.key === "order" ? (
+                              <div className="bg-[#1D3557] max-w-20 text-white rounded-[8px] px-2 py-1 text-center cursor-pointer">
+                                {row[col.key]}
+                              </div>
+                            ) : (
+                              row[col.key].toLocaleString()
+                            )}
+                        </td>
+                      )
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
       {/* Popup Modal */}
       {popupVisible && (
@@ -138,7 +148,7 @@ const StockManagementTable = () => {
         >
           <div
             className="bg-white rounded-lg p-6 w-96 relative montserrat-fontsfamily border-2 border-gray-400 pointer-events-auto"
-            onClick={(e) => e.stopPropagation()} // popup ক্লিক বন্ধ না করার জন্য
+            onClick={(e) => e.stopPropagation()} 
           >
             <h2 className="text-xl font-bold mb-4 text-[#1D3557] montserrat-fontsfamily">
               Order Details

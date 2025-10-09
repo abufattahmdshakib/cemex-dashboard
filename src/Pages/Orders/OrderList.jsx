@@ -130,7 +130,12 @@ const OrderList = () => {
             </div>
 
             {/* Table */}
-            {currentData.length === 0 ? (
+            {!checkboxes.some(Boolean) ? (
+                <div className="text-center py-10 text-[#757575] text-[15px] font-medium border border-[#E5E8EB] rounded-[12px] bg-white mb-8">
+                    ⚠ No columns selected. Please enable at least one column from
+                    <span className="font-semibold text-[#1D3557]"> Manage Row</span>.
+                </div>
+            ) : currentData.length === 0 ? (
                 <div className="text-center py-10 text-[#757575] text-[16px] font-medium">
                     No orders found matching your criteria.
                 </div>
@@ -141,7 +146,10 @@ const OrderList = () => {
                             <tr className="bg-white text-left">
                                 {tableColumns.map((col, index) =>
                                     checkboxes[index] && (
-                                        <th key={col.key} className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[12px] font-[600]">
+                                        <th
+                                            key={col.key}
+                                            className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[12px] font-[600]"
+                                        >
                                             {col.label}
                                         </th>
                                     )
@@ -178,21 +186,6 @@ const OrderList = () => {
                                                             alt="report"
                                                             className="w-6 h-6 object-contain"
                                                         />
-                                                    </div>
-                                                ) : col.key === "note" ? (
-                                                    <div
-                                                        className="flex items-center justify-center cursor-pointer"
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            Swal.fire({
-                                                                title: "Note Details",
-                                                                text: row[col.key] || "No note available",
-                                                                icon: "info",
-                                                                confirmButtonColor: "#1D3557",
-                                                            });
-                                                        }}
-                                                    >
-                                                        <span className="text-[#121417]">{row[col.key]}</span>
                                                     </div>
                                                 ) : (
                                                     <span>{row[col.key]}</span>

@@ -91,56 +91,63 @@ const DivisionalSales = () => {
                 </div>
             </div>
 
-            {/* Table Card */}
-            <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
-                <table className="w-full border-collapse">
-                    <thead>
-                        <tr className="bg-white text-left">
-                            {visibleColumns.map((col) => (
-                                <th
-                                    key={col.key}
-                                    className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[14px] font-[600]"
-                                >
-                                    {col.label}
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {divisionalData.map((row) => (
-                            <tr key={row.area} className="hover:bg-gray-50">
+            {/* table */}
+            {visibleColumns.length === 0 ? (
+                <div className="text-center py-10 text-[#757575] text-[15px] font-medium border border-[#E5E8EB] rounded-[12px] bg-white mb-8">
+                    ⚠ No columns selected. Please enable at least one column from
+                    <span className="font-semibold text-[#1D3557]"> Manage Row</span>.
+                </div>
+            ) : (
+                <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
+                    <table className="w-full border-collapse">
+                        <thead>
+                            <tr className="bg-white text-left">
                                 {visibleColumns.map((col) => (
-                                    <td
+                                    <th
                                         key={col.key}
-                                        className={`px-4 py-3 border-b border-[#E5E8EB] text-[14px] font-[500] ${col.key === "area"
-                                            ? "text-[#121417] underline"
-                                            : "text-[#757575]"
-                                            }`}
+                                        className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[14px] font-[600]"
                                     >
-                                        {col.key === "profit"
-                                            ? `৳${row[col.key]?.toLocaleString() || "-"}`
-                                            : col.key === "margin"
-                                                ? `${row[col.key] || "-"}%`
-                                                : col.key === "growth"
-                                                    ? row[col.key]
-                                                        ? row[col.key].startsWith("+") ? (
-                                                            <p className="montserrat-fontsfamily bg-[#EAFAF1] rounded-full text-[#2ECC71] text-[16px] py-1 px-3 text-center inline-block">
-                                                                {row[col.key]}
-                                                            </p>
-                                                        ) : (
-                                                            <p className="bg-[#FDEDEB] rounded-full text-[#E74C3C] text-[16px] py-1 px-3 text-center inline-block">
-                                                                {row[col.key]}
-                                                            </p>
-                                                        )
-                                                        : "-"
-                                                    : row[col.key] || "-"}
-                                    </td>
+                                        {col.label}
+                                    </th>
                                 ))}
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {divisionalData.map((row) => (
+                                <tr key={row.area} className="hover:bg-gray-50">
+                                    {visibleColumns.map((col) => (
+                                        <td
+                                            key={col.key}
+                                            className={`px-4 py-3 border-b border-[#E5E8EB] text-[14px] font-[500] ${col.key === "area"
+                                                ? "text-[#121417] underline"
+                                                : "text-[#757575]"
+                                                }`}
+                                        >
+                                            {col.key === "profit"
+                                                ? `৳${row[col.key]?.toLocaleString() || "-"}`
+                                                : col.key === "margin"
+                                                    ? `${row[col.key] || "-"}%`
+                                                    : col.key === "growth"
+                                                        ? row[col.key]
+                                                            ? row[col.key].startsWith("+") ? (
+                                                                <p className="montserrat-fontsfamily bg-[#EAFAF1] rounded-full text-[#2ECC71] text-[16px] py-1 px-3 text-center inline-block">
+                                                                    {row[col.key]}
+                                                                </p>
+                                                            ) : (
+                                                                <p className="bg-[#FDEDEB] rounded-full text-[#E74C3C] text-[16px] py-1 px-3 text-center inline-block">
+                                                                    {row[col.key]}
+                                                                </p>
+                                                            )
+                                                            : "-"
+                                                        : row[col.key] || "-"}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </div>
     );
 };

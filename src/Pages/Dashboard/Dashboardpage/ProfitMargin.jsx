@@ -27,7 +27,7 @@ const ProfitMargin = () => {
   const [selectedCity, setSelectedCity] = useState("All");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // প্রথম 5 টা true, Growth default false
+
   const [checkboxes, setCheckboxes] = useState([true, true, true, true, true, false]);
 
   const dropdownRef = useRef(null);
@@ -98,69 +98,74 @@ const ProfitMargin = () => {
       </div>
 
       {/* City Buttons */}
-      <div className="flex justify-start gap-5 py-7 border-y-1 border-[#DBE0E5] my-10">
+      <div className="flex justify-start gap-2 py-7 border-y-1 border-[#DBE0E5] my-10">
         {cities.map((city) => (
           <button
             key={city}
             onClick={() => setSelectedCity(city)}
-            className={`px-4 py-2 rounded text-[12px] font-[500] ${
-              selectedCity === city
+            className={`px-4 py-2 rounded text-[12px] font-[500] ${selectedCity === city
                 ? "bg-[#1D3557] text-white border-[#1D3557]"
                 : "bg-[#F0F2F5] text-[#121417] border-[#F0F2F5]"
-            }`}
+              }`}
           >
             {city}
           </button>
         ))}
       </div>
 
-      {/* Table Card */}
-      <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="bg-white text-left">
-              {visibleColumns.map((col) => (
-                <th
-                  key={col.key}
-                  className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[14px] font-[600]"
-                >
-                  {col.label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData.map((row) => (
-              <tr key={row.segment} className="hover:bg-gray-50">
+      {/* table */}
+      {visibleColumns.length === 0 ? (
+        <div className="text-center py-10 text-[#757575] text-[15px] font-medium border border-[#E5E8EB] rounded-[12px] bg-white mb-8">
+          ⚠ No columns selected. Please enable at least one column from
+          <span className="font-semibold text-[#1D3557]"> Manage Row</span>.
+        </div>
+      ) : (
+        <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-white text-left">
                 {visibleColumns.map((col) => (
-                  <td
+                  <th
                     key={col.key}
-                    className={`px-4 py-3 border-b border-[#E5E8EB] text-[14px] font-[500] ${
-                      col.key === "segment" ? "text-[#121417]" : "text-[#757575]"
-                    }`}
+                    className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[14px] font-[600]"
                   >
-                    {col.key === "revenue" || col.key === "costs" || col.key === "profit"
-                      ? `৳${row[col.key].toLocaleString()}`
-                      : col.key === "margin"
-                      ? `${row[col.key]}%`
-                      : row[col.key]}
-                  </td>
+                    {col.label}
+                  </th>
                 ))}
               </tr>
-            ))}
-            {filteredData.length === 0 && (
-              <tr>
-                <td
-                  colSpan={visibleColumns.length}
-                  className="text-center py-6 text-[#757575]"
-                >
-                  No data available for {selectedCity}
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {filteredData.map((row) => (
+                <tr key={row.segment} className="hover:bg-gray-50">
+                  {visibleColumns.map((col) => (
+                    <td
+                      key={col.key}
+                      className={`px-4 py-3 border-b border-[#E5E8EB] text-[14px] font-[500] ${col.key === "segment" ? "text-[#121417]" : "text-[#757575]"
+                        }`}
+                    >
+                      {col.key === "revenue" || col.key === "costs" || col.key === "profit"
+                        ? `৳${row[col.key].toLocaleString()}`
+                        : col.key === "margin"
+                          ? `${row[col.key]}%`
+                          : row[col.key]}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+              {filteredData.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={visibleColumns.length}
+                    className="text-center py-6 text-[#757575]"
+                  >
+                    No data available for {selectedCity}
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

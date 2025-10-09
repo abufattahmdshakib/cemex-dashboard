@@ -8,7 +8,7 @@ const DashboardCards = ({ cardData = [], selectedCity, setSelectedCity }) => {
   return (
     <div>
       {/* City Buttons */}
-      <div className="flex justify-start gap-4 py-7 border-y-1 border-[#DBE0E5] my-5">
+      <div className="flex justify-start gap-2 py-7 border-y-1 border-[#DBE0E5] my-5">
         {cities.map((city) => (
           <button
             key={city}

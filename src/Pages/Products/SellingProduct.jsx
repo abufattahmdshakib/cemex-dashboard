@@ -6,7 +6,7 @@ const cities = [
   "All", "Dhaka", "Sylhet", "Chattogram", "Barisal", "Mymensingh", "Rajshahi", "Rangpur", "Khulna"
 ];
 
-// প্রতিটি সিটির ডেটা আলাদাভাবে সংজ্ঞায়িত
+
 const dataByCity = {
   All: [
     { name: 'Cemex Builder A1', value: 20000000, color: '#E8DEEE' },
@@ -126,7 +126,7 @@ const SellingProduct = () => {
       </div>
 
       {/* City Buttons */}
-      <div className="flex justify-around gap-2 py-7 border-y border-[#DBE0E5] mt-5 ">
+      <div className="flex justify-start gap-2 py-7 border-y border-[#DBE0E5] mt-5 ">
         {cities.map((city) => (
           <button
             key={city}

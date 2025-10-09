@@ -87,44 +87,51 @@ const Efficiency = () => {
             </div>
 
             {/* Table */}
-            <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
-                <table className="w-full border-collapse">
-                    <thead>
-                        <tr className="bg-white text-left">
-                            {tableColumns.map((col, index) =>
-                                checkboxes[index] && (
-                                    <th
-                                        key={col.key}
-                                        className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[14px] font-[600]"
-                                    >
-                                        {col.label}
-                                    </th>
-                                )
-                            )}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {divisionalData.map((row) => (
-                            <tr key={row.area} className="hover:bg-gray-50">
+            {!checkboxes.some(Boolean) ? (
+                <div className="text-center py-10 text-[#757575] text-[15px] font-medium border border-[#E5E8EB] rounded-[12px] bg-white mb-8">
+                    ⚠ No columns selected. Please enable at least one column from
+                    <span className="font-semibold text-[#1D3557]"> Manage Row</span>.
+                </div>
+            ) : (
+                <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
+                    <table className="w-full border-collapse">
+                        <thead>
+                            <tr className="bg-white text-left">
                                 {tableColumns.map((col, index) =>
                                     checkboxes[index] && (
-                                        <td
+                                        <th
                                             key={col.key}
-                                            className={`px-4 py-3 border-b border-[#E5E8EB] text-[14px] font-[500] ${
-                                                col.key === "area"
-                                                    ? "text-[#121417] underline"
-                                                    : "text-[#757575]"
-                                            }`}
+                                            className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[14px] font-[600]"
                                         >
-                                            {row[col.key]}
-                                        </td>
+                                            {col.label}
+                                        </th>
                                     )
                                 )}
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {divisionalData.map((row) => (
+                                <tr key={row.area} className="hover:bg-gray-50">
+                                    {tableColumns.map((col, index) =>
+                                        checkboxes[index] && (
+                                            <td
+                                                key={col.key}
+                                                className={`px-4 py-3 border-b border-[#E5E8EB] text-[14px] font-[500] ${col.key === "area"
+                                                        ? "text-[#121417] underline"
+                                                        : "text-[#757575]"
+                                                    }`}
+                                            >
+                                                {row[col.key]}
+                                            </td>
+                                        )
+                                    )}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
+
         </div>
     );
 };

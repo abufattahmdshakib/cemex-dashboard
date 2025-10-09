@@ -78,7 +78,7 @@ const ProductList = () => {
     setPopupVisible(false);
     setSelectedRow(null);
   };
-
+  
   return (
     <div className="montserrat-fontsfamily">
       <div className="flex justify-between items-center mb-6">
@@ -88,47 +88,54 @@ const ProductList = () => {
           setColumnVisibility={setColumnVisibility}
         />
       </div>
-
-      <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="bg-white text-left">
-              {visibleColumns.map((col) => (
-                <th
-                  key={col.key}
-                  className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[12px] font-[600]"
-                >
-                  {col.label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {orderData.map((row) => (
-              <tr key={row.orderId} className="hover:bg-gray-50">
+      {/* table */}
+      {visibleColumns.length === 0 ? (
+        <div className="text-center py-10 text-[#757575] text-[15px] font-medium border border-[#E5E8EB] rounded-[12px] bg-white mb-8">
+          ⚠ No columns selected. Please enable at least one column from
+          <span className="font-semibold text-[#1D3557]"> Manage Row</span>.
+        </div>
+      ) : (
+        <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-white text-left">
                 {visibleColumns.map((col) => (
-                  <td
+                  <th
                     key={col.key}
-                    className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "orderId" ? "text-[#121417]" : "text-[#757575]"
-                      } ${col.key === "update" ? "cursor-pointer" : ""}`}
-                    onClick={() => col.key === "update" && openPopup(row)}
+                    className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[12px] font-[600]"
                   >
-                    {col.key === "sellingPrice" || col.key === "buyingPrice"
-                      ? `৳${row[col.key]?.toLocaleString()}`
-                      : col.key === "update" ? (
-                        <div className="bg-[#F0F2F5] rounded-[8px] p-2 flex items-center justify-center w-8 h-8 cursor-pointer">
-                          <img src={row[col.key]} alt="update" className="w-6 h-6" />
-                        </div>
-                      ) : (
-                        row[col.key]
-                      )}
-                  </td>
+                    {col.label}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {orderData.map((row) => (
+                <tr key={row.orderId} className="hover:bg-gray-50">
+                  {visibleColumns.map((col) => (
+                    <td
+                      key={col.key}
+                      className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "orderId" ? "text-[#121417]" : "text-[#757575]"
+                        } ${col.key === "update" ? "cursor-pointer" : ""}`}
+                      onClick={() => col.key === "update" && openPopup(row)}
+                    >
+                      {col.key === "sellingPrice" || col.key === "buyingPrice"
+                        ? `৳${row[col.key]?.toLocaleString()}`
+                        : col.key === "update" ? (
+                          <div className="bg-[#F0F2F5] rounded-[8px] p-2 flex items-center justify-center w-8 h-8 cursor-pointer">
+                            <img src={row[col.key]} alt="update" className="w-6 h-6" />
+                          </div>
+                        ) : (
+                          row[col.key]
+                        )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
       {/* Popup Modal */}
       {popupVisible && selectedRow && (

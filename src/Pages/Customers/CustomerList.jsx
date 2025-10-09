@@ -210,7 +210,58 @@ const CustomerList = () => {
             </div>
 
             {/* Table */}
-            <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto mb-8">
+            {!checkboxes.some(Boolean) ? (
+                <div className="text-center py-10 text-[#757575] text-[15px] font-medium border border-[#E5E8EB] rounded-[12px] bg-white mb-8">
+                    ⚠ No columns selected. Please enable at least one column from
+                    <span className="font-semibold text-[#1D3557]"> Manage Row</span>.
+                </div>
+            ) : currentData.length === 0 ? (
+                <div className="text-center py-10 text-[#757575] text-[16px] font-medium">
+                    No orders found matching your criteria.
+                </div>
+            ) : (<div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto mb-8">
+                <table className="w-full border-collapse">
+                    <thead>
+                        <tr className="bg-white text-left">
+                            {tableColumns.map((col, index) => checkboxes[index] && (
+                                <th key={col.key} className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[12px] font-[600]">{col.label}</th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {currentData.map(row => (
+                            <tr key={row.orderId} className="hover:bg-gray-50">
+                                {tableColumns.map((col, index) => checkboxes[index] && (
+                                    <td
+                                        key={col.key}
+                                        className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "orderId" ? "text-[#121417]" : "text-[#757575]"}`}
+                                    >
+                                        {col.key === "update" ? (
+                                            <div
+                                                className="bg-[#F0F2F5] rounded-[8px] p-2 flex items-center justify-center w-8 h-8 cursor-pointer"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    Swal.fire({
+                                                        title: "Update Details",
+                                                        text: "No update available",
+                                                        icon: "info",
+                                                        confirmButtonColor: "#1D3557",
+                                                    });
+                                                }}
+                                            >
+                                                <img src={row[col.key]} alt="edit" className="w-5 h-5" />
+                                            </div>
+                                        ) : (
+                                            row[col.key]
+                                        )}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>)}
+            {/* <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto mb-8">
                 <table className="w-full border-collapse">
                     <thead>
                         <tr className="bg-white text-left">
@@ -251,7 +302,7 @@ const CustomerList = () => {
                         ))}
                     </tbody>
                 </table>
-            </div>
+            </div> */}
 
             {/* Pagination */}
             <div className="flex justify-between items-center mt-4 text-[14px]">
