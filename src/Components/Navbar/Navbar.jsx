@@ -14,6 +14,8 @@ const Navbar = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [aiHidden, setAiHidden] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
+
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -71,8 +73,15 @@ const Navbar = () => {
                 <input
                   type="text"
                   placeholder="Search here"
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      setSearchText(""); // Clear input on Enter
+                    }
+                  }}
                   className={`montserrat-fontsfamily cursor-pointer bg-[#F0F2F5] text-[#121417] py-3 outline-none transition-all duration-500
-            ${showSearch ? "flex-1 text-left pr-2 w-[24px]" : "w-0 opacity-0"}`}
+    ${showSearch ? "flex-1 text-left pr-2 w-[24px]" : "w-0 opacity-0"}`}
                   autoFocus={showSearch}
                 />
               </div>
