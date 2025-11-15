@@ -319,8 +319,8 @@ const CustomerList = () => {
                         </button>
                     ))}
 
-                    {endPage < totalPages && <span className="px-2">…</span>}
-                    {endPage < totalPages && <button onClick={() => setCurrentPage(totalPages)} className="px-2 py-1 border border-[#DBE0E5] rounded-[8px] hover:bg-gray-100">{totalPages}</button>}
+                    {endPage < totalPages && <span className="px-2 text-[#121417]">…</span>}
+                    {endPage < totalPages && <button onClick={() => setCurrentPage(totalPages)} className="px-2 py-1 border text-[#121417] border-[#DBE0E5] rounded-[8px] hover:bg-gray-100">{totalPages}</button>}
 
                     <button onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages}
                         className={`px-3 py-1 flex items-center text-black gap-2 border rounded-r-[8px] border-[#DBE0E5] hover:bg-gray-100 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}>
@@ -332,12 +332,12 @@ const CustomerList = () => {
                 <div className="relative flex items-center gap-2">
                     <span className="text-[#121417] text-[14px] ">Result per page:</span>
                     <div className="relative w-16">
-                        <button className="w-full text-left px-2 py-1 border rounded-[6px] border-[#DBE0E5] bg-white flex justify-between items-center"
+                        <button className="w-full text-left px-2 py-1 text-[#121417] border rounded-[6px] border-[#DBE0E5] bg-white flex justify-between items-center"
                             onClick={() => setResultsDropdownOpen(!resultsDropdownOpen)}>
                             {resultsPerPage} <FaChevronDown className={`ml-1 transition-transform duration-300 ${resultsDropdownOpen ? "rotate-180" : ""}`} />
                         </button>
                         {resultsDropdownOpen && (
-                            <ul className="absolute w-full mt-1 bg-white border border-[#DBE0E5] rounded-[6px] shadow-lg z-10">
+                            <ul className="absolute w-full mt-1 text-[#626262] border border-[#DBE0E5] rounded-[6px] shadow-lg z-10">
                                 {[10, 15, 20].map(num => (
                                     <li key={num} onClick={() => { setResultsPerPage(num); setCurrentPage(1); setResultsDropdownOpen(false); }}
                                         className="px-2 py-1 cursor-pointer hover:bg-[#1D3557] hover:text-white">{num}</li>

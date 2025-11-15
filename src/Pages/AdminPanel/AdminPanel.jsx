@@ -127,12 +127,12 @@ const AdminPanel = () => {
                         </button>
                     ))}
 
-                    {endPage < totalPages && <span className="px-2">…</span>}
+                    {endPage < totalPages && <span className="px-2 text-[#121417]">…</span>}
 
                     {endPage < totalPages && (
                         <button
                             onClick={() => setCurrentPage(totalPages)}
-                            className="px-2 py-1 border border-[#DBE0E5] rounded-[8px] hover:bg-gray-100"
+                            className="px-2 py-1 border text-[#121417] border-[#DBE0E5] rounded-[8px] hover:bg-gray-100"
                         >
                             {totalPages}
                         </button>
@@ -141,7 +141,7 @@ const AdminPanel = () => {
                     <button
                         onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                         disabled={currentPage === totalPages}
-                        className={`px-3 py-1 flex items-center gap-2 border rounded-r-[8px] border-[#DBE0E5] hover:bg-gray-100 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
+                        className={`px-3 py-1 flex items-center text-[#626262] gap-2 border rounded-r-[8px] border-[#DBE0E5] hover:bg-gray-100 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
                             }`}
                     >
                         Next
@@ -154,7 +154,7 @@ const AdminPanel = () => {
                     <span className="text-[#121417] text-[14px] ">Result per page:</span>
                     <div className="relative w-16">
                         <button
-                            className="w-full text-left px-2 py-1 border rounded-[6px] border-[#DBE0E5] bg-white flex justify-between items-center"
+                            className="w-full text-left px-2 py-1 text-[#626262] border rounded-[6px] border-[#DBE0E5]  flex justify-between items-center"
                             onClick={() => setResultsDropdownOpen(!resultsDropdownOpen)}
                         >
                             {resultsPerPage}
@@ -162,7 +162,7 @@ const AdminPanel = () => {
                         </button>
 
                         {resultsDropdownOpen && (
-                            <ul className="absolute w-full mt-1 bg-white border border-[#DBE0E5] rounded-[6px] shadow-lg z-10">
+                            <ul className="absolute w-full mt-1 border border-[#DBE0E5] rounded-[6px] shadow-lg z-10">
                                 {[10, 15, 20].map((num) => (
                                     <li
                                         key={num}
@@ -171,7 +171,7 @@ const AdminPanel = () => {
                                             setCurrentPage(1);
                                             setResultsDropdownOpen(false);
                                         }}
-                                        className="px-2 py-1 cursor-pointer hover:bg-[#1D3557] hover:text-white"
+                                        className="px-2 py-1 cursor-pointer text-[#626262] hover:bg-[#1D3557] hover:text-white"
                                     >
                                         {num}
                                     </li>
