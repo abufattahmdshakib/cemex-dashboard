@@ -42,7 +42,7 @@ const Customers = () => {
 
     return (
         <div>
-            <div className="mt-5 flex justify-between">
+            <div className="mt-5 flex justify-between ">
                 {/* Customers */}
                 <div>
                     <h1 className="montserrat-fontsfamily text-[32px] text-[#1D3557] font-[700]">
