@@ -60,7 +60,6 @@ const RevenueShare = () => {
                 {/* Manage Row Button with Dropdown */}
                 <div className="relative cursor-pointer" ref={dropdownRef}>
                     <button
-                        data-flash
                         onClick={() => setDropdownOpen(!dropdownOpen)}
                         className="flex items-center shadow-md gap-2 border-1 border-[#DBE0E5] bg-[#FFFFFF] text-[14px] text-[#121417] px-5 py-3 rounded-[8px] cursor-pointer"
                     >

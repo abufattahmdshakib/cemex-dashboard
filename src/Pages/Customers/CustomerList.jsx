@@ -261,49 +261,7 @@ const CustomerList = () => {
                     </tbody>
                 </table>
             </div>)}
-            {/* <div className="bg-white shadow-md rounded-[12px] border border-[#E5E8EB] overflow-x-auto mb-8">
-                <table className="w-full border-collapse">
-                    <thead>
-                        <tr className="bg-white text-left">
-                            {tableColumns.map((col, index) => checkboxes[index] && (
-                                <th key={col.key} className="px-4 py-3 border-b border-[#E5E8EB] text-[#121417] text-[12px] font-[600]">{col.label}</th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {currentData.map(row => (
-                            <tr key={row.orderId} className="hover:bg-gray-50">
-                                {tableColumns.map((col, index) => checkboxes[index] && (
-                                    <td
-                                        key={col.key}
-                                        className={`px-4 py-3 border-b border-[#E5E8EB] text-[12px] font-[500] ${col.key === "orderId" ? "text-[#121417]" : "text-[#757575]"}`}
-                                    >
-                                        {col.key === "update" ? (
-                                            <div
-                                                className="flex items-center justify-center cursor-pointer"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    Swal.fire({
-                                                        title: "Update Details",
-                                                        text: "No update available",
-                                                        icon: "info",
-                                                        confirmButtonColor: "#1D3557",
-                                                    });
-                                                }}
-                                            >
-                                                <img src={row[col.key]} alt="edit" className="w-5 h-5" />
-                                            </div>
-                                        ) : (
-                                            row[col.key]
-                                        )}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div> */}
-
+            
             {/* Pagination */}
             <div className="flex justify-between items-center mt-4 text-[14px]">
                 <div className="flex items-center gap-1">
@@ -337,7 +295,7 @@ const CustomerList = () => {
                             {resultsPerPage} <FaChevronDown className={`ml-1 transition-transform duration-300 ${resultsDropdownOpen ? "rotate-180" : ""}`} />
                         </button>
                         {resultsDropdownOpen && (
-                            <ul className="absolute w-full mt-1 text-[#626262] border border-[#DBE0E5] rounded-[6px] shadow-lg z-10">
+                            <ul className="absolute w-full mt-1 bg-white text-[#626262] border border-[#DBE0E5] rounded-[6px] shadow-lg z-10">
                                 {[10, 15, 20].map(num => (
                                     <li key={num} onClick={() => { setResultsPerPage(num); setCurrentPage(1); setResultsDropdownOpen(false); }}
                                         className="px-2 py-1 cursor-pointer hover:bg-[#1D3557] hover:text-white">{num}</li>

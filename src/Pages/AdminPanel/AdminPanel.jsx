@@ -27,7 +27,7 @@ const AdminPanel = () => {
     for (let i = startPage; i <= endPage; i++) visiblePages.push(i);
 
     return (
-        <div className="montserrat-fontsfamily mt-8 mb-12">
+        <div className="montserrat-fontsfamily mt-8 mb-22">
             {/* Header */}
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-[22px] text-[#1D3557] font-[700]">Admin Panel</h1>
@@ -162,7 +162,7 @@ const AdminPanel = () => {
                         </button>
 
                         {resultsDropdownOpen && (
-                            <ul className="absolute w-full mt-1 border border-[#DBE0E5] rounded-[6px] shadow-lg z-10">
+                            <ul className="absolute w-full bg-white mt-1 border border-[#DBE0E5] rounded-[6px] shadow-lg z-60">
                                 {[10, 15, 20].map((num) => (
                                     <li
                                         key={num}
